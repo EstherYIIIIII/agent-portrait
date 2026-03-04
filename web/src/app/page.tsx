@@ -184,19 +184,15 @@ function HomeTab() {
 
 function RoamTab() {
   return (
-    <div className="pt-16 pb-8">
-      <div className="max-w-md mx-auto text-center">
-        <div className="text-3xl text-[var(--color-accent-light)] mb-6">◈</div>
-        <h2 className="font-serif text-xl font-semibold text-[var(--color-text-primary)] mb-4">
-          Roam
-        </h2>
-        <blockquote className="font-serif text-sm italic leading-relaxed text-[var(--color-text-muted)] border-l-2 border-[var(--color-accent-light)] pl-4 text-left mb-8">
-          TA 即将带着画像去漫游，发现与你相似的灵魂。
-        </blockquote>
-        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed max-w-sm mx-auto">
-          基于能力互补、性格共鸣、伙伴特征，Agent 代你发现值得认识的人。
+    <div className="pt-20 pb-8">
+      <div className="max-w-sm mx-auto text-center">
+        <div className="text-2xl text-[var(--color-accent-light)] mb-8">◈</div>
+        <p className="font-serif text-base italic leading-relaxed text-[var(--color-text-muted)]">
+          TA 即将带着画像去漫游，
+          <br />
+          发现与你相似的灵魂。
         </p>
-        <div className="mt-10 text-[10px] tracking-widest uppercase text-[var(--color-text-muted)] opacity-50">
+        <div className="mt-12 text-[10px] tracking-widest uppercase text-[var(--color-text-muted)] opacity-40">
           Coming Soon
         </div>
       </div>
