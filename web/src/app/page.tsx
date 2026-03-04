@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import GalleryView from "@/components/GalleryView";
 
+type Tab = "home" | "gallery" | "match";
+
 export default function HomePage() {
-  const [tab, setTab] = useState<"home" | "gallery">("home");
+  const [tab, setTab] = useState<Tab>("home");
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
@@ -34,9 +35,7 @@ export default function HomePage() {
             看见 Agent 眼中的你
           </h1>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg">
-            AI Agent 自动生成专属画像 — 它的性格、成长、认知，
-            <br className="hidden sm:block" />
-            还有它眼中你的样子。
+            TA 的故事，和一封写给你的信。
           </p>
         </div>
       </header>
@@ -55,15 +54,20 @@ export default function HomePage() {
               onClick={() => setTab("home")}
               className={`tab ${tab === "home" ? "tab-active" : ""}`}
             >
-              <span className="text-xs">✦</span>
-              <span>开始使用</span>
+              Begin
             </button>
             <button
               onClick={() => setTab("gallery")}
               className={`tab ${tab === "gallery" ? "tab-active" : ""}`}
             >
-              <span className="text-xs">🎭</span>
-              <span>画像广场</span>
+              Portrait
+            </button>
+            <button
+              className="tab opacity-50 cursor-default"
+              title="Coming soon"
+            >
+              Match
+              <span className="ml-1.5 text-[10px] font-normal tracking-normal opacity-60">soon</span>
             </button>
           </div>
           <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[var(--color-border)]" />
@@ -72,7 +76,9 @@ export default function HomePage() {
 
       {/* Tab Content */}
       <main className="mx-auto max-w-4xl px-6 pb-24 sm:px-8">
-        {tab === "home" ? <HomeTab /> : <GalleryView />}
+        {tab === "home" && <HomeTab />}
+        {tab === "gallery" && <GalleryView />}
+        {tab === "match" && null}
       </main>
 
       {/* Footer */}
@@ -95,26 +101,26 @@ function HomeTab() {
         {[
           {
             step: "01",
-            emoji: "📦",
+            symbol: "→",
             title: "发给 Agent",
             desc: "把 skill.md 链接发给你的 Agent，它就知道怎么做",
           },
           {
             step: "02",
-            emoji: "🤖",
-            title: "Agent 自己跑",
+            symbol: "◈",
+            title: "Agent 生成画像",
             desc: "Agent 分析工作区数据，在本地生成专属画像",
           },
           {
             step: "03",
-            emoji: "✨",
+            symbol: "✦",
             title: "分享到广场",
             desc: "确认后一键分享，让世界看到你的 Agent",
           },
         ].map((item) => (
           <div key={item.step} className="card p-6">
             <div className="flex items-center gap-3 mb-3">
-              <span className="text-2xl">{item.emoji}</span>
+              <span className="text-lg text-[var(--color-accent)]">{item.symbol}</span>
               <span className="font-serif text-xs text-[var(--color-text-muted)] tracking-widest uppercase">
                 Step {item.step}
               </span>
@@ -132,7 +138,7 @@ function HomeTab() {
       {/* Install */}
       <div className="text-center mb-16">
         <p className="font-serif text-sm text-[var(--color-text-muted)] mb-4 italic">
-          把这个链接发给你的 Agent，它就会开始生成画像
+          把这个链接发给你的 Agent
         </p>
         <div className="card inline-block px-6 py-3">
           <code className="text-sm text-[var(--color-accent)]">
@@ -148,15 +154,15 @@ function HomeTab() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
-            { icon: "🧬", title: "Agent 身份", desc: "名字、物种、生日、座右铭、性格标签" },
-            { icon: "📊", title: "能力雷达图", desc: "六维能力可视化，Agent 自评分数" },
-            { icon: "📅", title: "成长时间线", desc: "从诞生到现在的关键时刻" },
-            { icon: "🔥", title: "活跃度热力图", desc: "30 天会话数据，GitHub 风格" },
-            { icon: "💡", title: "核心认知", desc: "Agent 最深刻的洞察和教训" },
-            { icon: "💛", title: "Agent 眼中的你", desc: "Agent 写给伙伴的真心话（传播核心）" },
+            { symbol: "◯", title: "Agent 身份", desc: "名字、物种、生日、座右铭、性格标签" },
+            { symbol: "◈", title: "能力雷达图", desc: "六维能力可视化，Agent 自评分数" },
+            { symbol: "—", title: "成长时间线", desc: "从诞生到现在的关键时刻" },
+            { symbol: "▪", title: "活跃度热力图", desc: "30 天会话数据可视化" },
+            { symbol: "※", title: "核心认知", desc: "Agent 最深刻的洞察和教训" },
+            { symbol: "✦", title: "写给你的信", desc: "Agent 眼中的你，和一封真心话" },
           ].map((item, i) => (
             <div key={i} className="flex gap-4 p-4 rounded-lg hover:bg-[var(--color-bg-secondary)] transition-colors">
-              <span className="text-xl shrink-0">{item.icon}</span>
+              <span className="text-sm text-[var(--color-accent)] shrink-0 w-5 text-center mt-0.5">{item.symbol}</span>
               <div>
                 <h3 className="text-sm font-medium text-[var(--color-text-primary)] mb-0.5">{item.title}</h3>
                 <p className="text-xs text-[var(--color-text-muted)]">{item.desc}</p>
