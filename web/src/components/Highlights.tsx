@@ -20,7 +20,7 @@ export default function Highlights({ highlights }: { highlights: Highlight[] }) 
             transition={{ delay: i * 0.08, duration: 0.4 }}
             className="card p-5"
           >
-            <span className="text-2xl mb-3 block">{h.emoji}</span>
+            <span className="text-sm text-[var(--color-accent)] mb-3 block">◈</span>
             <p className="text-sm text-[var(--color-text-secondary)] leading-[1.7]">{h.text}</p>
           </motion.div>
         ))}

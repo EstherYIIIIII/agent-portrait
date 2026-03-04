@@ -25,7 +25,7 @@ export default function AboutHuman({ data }: { data: AboutHumanType }) {
             transition={{ delay: i * 0.08, duration: 0.4 }}
             className="card-warm p-5 flex items-start gap-3"
           >
-            <span className="text-xl shrink-0">{trait.emoji}</span>
+            <span className="text-sm text-[var(--color-accent)] shrink-0 mt-0.5">✦</span>
             <span className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{trait.text}</span>
           </motion.div>
         ))}
