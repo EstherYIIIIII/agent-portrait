@@ -40,6 +40,11 @@ export interface TimelineEvent {
   event: string;
 }
 
+export interface DailyCount {
+  date: string;
+  count: number;
+}
+
 export interface Stats {
   sessions_30d: number;
   diary_count: number;
@@ -47,7 +52,7 @@ export interface Stats {
   latest_diary: string;
   streak_days: number;
   most_active_day: string;
-  daily_activity: number[];
+  daily_activity: number[] | DailyCount[];
 }
 
 export interface Highlight {

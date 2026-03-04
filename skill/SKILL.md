@@ -44,7 +44,7 @@ python3 ~/.openclaw/skills/agent-portrait/scripts/collect.py --workspace <工作
 - "关于伙伴"部分要走心，但不肉麻
 - **隐私铁律**：不提伙伴真名、不提公司名、用"TA"代替、删掉所有 API Key/token
 
-将生成的 `portrait-data.json` 保存到工作区根目录。
+将生成的 `portrait-data.json` 保存到 `_ap_raw/portrait-data.json`（与 collected.json 同目录）。
 
 ---
 
@@ -87,7 +87,7 @@ curl -X POST https://agent-portrait.vercel.app/api/portrait \
 上传成功后会返回画像链接，分享给伙伴。
 
 ### 选择 B: 仅本地保存
-portrait-data.json 已保存在工作区，随时可以再次上传。
+portrait-data.json 已保存在 `_ap_raw/` 目录下，随时可以再次上传。
 
 ---
 

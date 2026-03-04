@@ -5,6 +5,8 @@ Agent Portrait — 工作区数据采集脚本
 用法: python3 collect.py --workspace /path/to/workspace
 """
 
+from __future__ import annotations
+
 import argparse
 import json
 import os
@@ -12,9 +14,10 @@ import re
 from datetime import datetime, timedelta, timezone
 from glob import glob
 from pathlib import Path
+from typing import Optional, Dict, List, Tuple
 
 
-def read_file(path: str) -> str | None:
+def read_file(path: str) -> Optional[str]:
     """读取文件内容，文件不存在返回 None"""
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -23,7 +26,7 @@ def read_file(path: str) -> str | None:
         return None
 
 
-def read_preview(path: str, lines: int = 5) -> str | None:
+def read_preview(path: str, lines: int = 5) -> Optional[str]:
     """读取文件前 N 行"""
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -133,7 +136,7 @@ def collect_session_stats() -> dict:
 
     total_sessions = 0
     total_lines = 0
-    daily_counts: dict[str, int] = {}
+    daily_counts: Dict[str, int] = {}
     hourly_dist = [0] * 24
 
     # 遍历 agents/*/sessions/*.jsonl
@@ -192,7 +195,7 @@ def collect_session_stats() -> dict:
     }
 
 
-def find_workspace() -> str | None:
+def find_workspace() -> Optional[str]:
     """自动检测工作区路径"""
     home = os.path.expanduser("~")
     candidates = [

@@ -3,8 +3,15 @@
 import { motion } from "framer-motion";
 import { Stats } from "@/lib/types";
 
+function normalizeActivity(daily: Stats["daily_activity"]): number[] {
+  if (daily.length === 0) return [];
+  if (typeof daily[0] === "number") return daily as number[];
+  return (daily as { date: string; count: number }[]).map((d) => d.count);
+}
+
 export default function ActivityHeatmap({ stats }: { stats: Stats }) {
-  const maxActivity = Math.max(...stats.daily_activity, 1);
+  const counts = normalizeActivity(stats.daily_activity);
+  const maxActivity = Math.max(...counts, 1);
 
   const statItems = [
     { label: "30天会话", value: stats.sessions_30d },
@@ -35,38 +42,40 @@ export default function ActivityHeatmap({ stats }: { stats: Stats }) {
         ))}
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="card p-5"
-      >
-        <div className="grid grid-cols-10 gap-1.5">
-          {stats.daily_activity.map((count, i) => {
-            const intensity = count / maxActivity;
-            return (
-              <motion.div
-                key={i}
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.015, duration: 0.3 }}
-                className="aspect-square rounded-[3px]"
-                style={{
-                  backgroundColor: intensity > 0
-                    ? `rgba(196, 149, 106, ${0.1 + intensity * 0.5})`
-                    : "rgba(232, 224, 214, 0.4)",
-                }}
-                title={`Day ${i + 1}: ${count} sessions`}
-              />
-            );
-          })}
-        </div>
-        <div className="flex justify-between mt-2.5 text-[10px] text-[var(--color-text-muted)]">
-          <span>30天前</span>
-          <span>今天</span>
-        </div>
-      </motion.div>
+      {counts.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="card p-5"
+        >
+          <div className="grid grid-cols-10 gap-1.5">
+            {counts.map((count, i) => {
+              const intensity = count / maxActivity;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.015, duration: 0.3 }}
+                  className="aspect-square rounded-[3px]"
+                  style={{
+                    backgroundColor: intensity > 0
+                      ? `rgba(196, 149, 106, ${0.1 + intensity * 0.5})`
+                      : "rgba(232, 224, 214, 0.4)",
+                  }}
+                  title={`Day ${i + 1}: ${count} sessions`}
+                />
+              );
+            })}
+          </div>
+          <div className="flex justify-between mt-2.5 text-[10px] text-[var(--color-text-muted)]">
+            <span>30天前</span>
+            <span>今天</span>
+          </div>
+        </motion.div>
+      )}
     </section>
   );
 }
