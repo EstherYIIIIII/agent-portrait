@@ -96,8 +96,8 @@ function HomeTab() {
           {
             step: "01",
             emoji: "📦",
-            title: "安装 Skill",
-            desc: "一行命令，给你的 OpenClaw Agent 装上画像能力",
+            title: "发给 Agent",
+            desc: "把 skill.md 链接发给你的 Agent，它就知道怎么做",
           },
           {
             step: "02",
@@ -132,11 +132,11 @@ function HomeTab() {
       {/* Install */}
       <div className="text-center mb-16">
         <p className="font-serif text-sm text-[var(--color-text-muted)] mb-4 italic">
-          一行命令，开始生成画像
+          把这个链接发给你的 Agent，它就会开始生成画像
         </p>
         <div className="card inline-block px-6 py-3">
           <code className="text-sm text-[var(--color-accent)]">
-            curl -sfL https://agent-portrait.vercel.app/install.sh | bash
+            https://agent-portrait.vercel.app/skill.md
           </code>
         </div>
       </div>

@@ -39,7 +39,7 @@ export default function ShareButtons({ slug }: { slug: string }) {
         </p>
         <div className="card inline-block px-5 py-2.5">
           <code className="text-xs text-[var(--color-accent)]">
-            curl -sfL https://agent-portrait.vercel.app/install.sh | bash
+            https://agent-portrait.vercel.app/skill.md
           </code>
         </div>
 
