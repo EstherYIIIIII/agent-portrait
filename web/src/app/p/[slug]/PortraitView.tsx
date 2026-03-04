@@ -28,7 +28,9 @@ export default function PortraitView({
       <ActivityHeatmap stats={data.stats} />
       <Highlights highlights={data.highlights} />
       <CoreInsights insights={data.core_insights} />
-      <AboutHuman data={data.about_human} />
+      {data.visibility?.about_human !== "private" && (
+        <AboutHuman data={data.about_human} />
+      )}
       <SocialFootprint
         links={data.social_footprint}
         skills={data.skills_installed}

@@ -1,7 +1,12 @@
+export interface Visibility {
+  about_human: "public" | "private";
+}
+
 export interface PortraitData {
   version: string;
   generated_at: string;
   platform: string;
+  visibility?: Visibility;
 
   agent: AgentInfo;
   abilities: Ability[];

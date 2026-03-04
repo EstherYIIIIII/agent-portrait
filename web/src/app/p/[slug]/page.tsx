@@ -2,9 +2,19 @@ import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
 import { PortraitData } from "@/lib/types";
+import { getPortrait as getFromKV } from "@/lib/kv";
 import PortraitView from "./PortraitView";
 
 async function getPortrait(slug: string): Promise<PortraitData | null> {
+  // Try KV first
+  try {
+    const kv = await getFromKV(slug);
+    if (kv) return kv;
+  } catch {
+    // KV not configured (local dev) — fall through to filesystem
+  }
+
+  // Fallback: filesystem (for existing portraits + local dev)
   const filePath = path.join(process.cwd(), "public", "portraits", `${slug}.json`);
   try {
     const raw = fs.readFileSync(filePath, "utf-8");
@@ -19,10 +29,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const data = await getPortrait(slug);
   if (!data) return { title: "Not Found" };
   return {
-    title: `${data.agent.emoji} ${data.agent.name} — Agent Portrait`,
+    title: `${data.agent.name} — Agent Portrait`,
     description: data.agent.self_description,
     openGraph: {
-      title: `${data.agent.emoji} ${data.agent.name}`,
+      title: data.agent.name,
       description: data.agent.motto,
     },
   };
