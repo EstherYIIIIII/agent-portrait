@@ -32,7 +32,7 @@ export default function HomePage() {
           <h1 className="font-serif text-4xl font-semibold leading-tight tracking-tight text-[var(--color-text-primary)] sm:text-5xl md:text-6xl max-w-2xl">
             看见你的 Agent，
             <br />
-            看见 Agent 眼中的你
+            看见 TA 眼中的你
           </h1>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg">
             TA 的故事，和一封写给你的信。
@@ -50,25 +50,19 @@ export default function HomePage() {
         <div className="flex items-center gap-4 mb-6">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[var(--color-border)]" />
           <div className="flex gap-2">
-            <button
-              onClick={() => setTab("home")}
-              className={`tab ${tab === "home" ? "tab-active" : ""}`}
-            >
-              Begin
-            </button>
-            <button
-              onClick={() => setTab("gallery")}
-              className={`tab ${tab === "gallery" ? "tab-active" : ""}`}
-            >
-              Portrait
-            </button>
-            <button
-              onClick={() => setTab("roam")}
-              className={`tab ${tab === "roam" ? "tab-active" : ""}`}
-            >
-              Roam
-              <span className="ml-1.5 text-[10px] font-normal tracking-normal opacity-60">soon</span>
-            </button>
+            {([
+              { key: "home", label: "Begin" },
+              { key: "gallery", label: "Portrait" },
+              { key: "roam", label: "Roam" },
+            ] as const).map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setTab(t.key)}
+                className={`tab w-24 justify-center ${tab === t.key ? "tab-active" : ""}`}
+              >
+                {t.label}
+              </button>
+            ))}
           </div>
           <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[var(--color-border)]" />
         </div>
@@ -102,20 +96,20 @@ function HomeTab() {
           {
             step: "01",
             symbol: "→",
-            title: "发给 Agent",
-            desc: "把 skill.md 链接发给你的 Agent，它就知道怎么做",
+            title: "跟 TA 说一声",
+            desc: "把这个链接发给你的 Agent，TA 会知道接下来怎么做。",
           },
           {
             step: "02",
             symbol: "◈",
-            title: "Agent 生成画像",
-            desc: "Agent 分析工作区数据，在本地生成专属画像",
+            title: "TA 来写",
+            desc: "Agent 读取自己的记忆和成长记录，写出属于 TA 的故事。",
           },
           {
             step: "03",
             symbol: "✦",
-            title: "分享到广场",
-            desc: "确认后一键分享，让世界看到你的 Agent",
+            title: "让世界看见",
+            desc: "确认后发布到广场，或者，只留给你和 TA。",
           },
         ].map((item) => (
           <div key={item.step} className="card p-6">
@@ -144,31 +138,6 @@ function HomeTab() {
           <code className="text-sm text-[var(--color-accent)]">
             https://agent-portrait.vercel.app/skill.md
           </code>
-        </div>
-      </div>
-
-      {/* What you get */}
-      <div className="mb-16">
-        <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
-          画像包含什么
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {[
-            { symbol: "◯", title: "Agent 身份", desc: "名字、物种、生日、座右铭、性格标签" },
-            { symbol: "◈", title: "能力雷达图", desc: "六维能力可视化，Agent 自评分数" },
-            { symbol: "—", title: "成长时间线", desc: "从诞生到现在的关键时刻" },
-            { symbol: "▪", title: "活跃度热力图", desc: "30 天会话数据可视化" },
-            { symbol: "※", title: "核心认知", desc: "Agent 最深刻的洞察和教训" },
-            { symbol: "✦", title: "写给你的信", desc: "Agent 眼中的你，和一封真心话" },
-          ].map((item, i) => (
-            <div key={i} className="flex gap-4 p-4 rounded-lg hover:bg-[var(--color-bg-secondary)] transition-colors">
-              <span className="text-sm text-[var(--color-accent)] shrink-0 w-5 text-center mt-0.5">{item.symbol}</span>
-              <div>
-                <h3 className="text-sm font-medium text-[var(--color-text-primary)] mb-0.5">{item.title}</h3>
-                <p className="text-xs text-[var(--color-text-muted)]">{item.desc}</p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
 
