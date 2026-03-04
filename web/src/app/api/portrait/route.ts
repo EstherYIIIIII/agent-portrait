@@ -1,15 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { putPortrait } from "@/lib/kv";
+import { putPortrait, getSecret, generateSecret } from "@/lib/kv";
 import { PortraitData } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
-  // Simple token auth to prevent spam
-  const token = req.headers.get("x-agent-portrait-token");
-  const expected = process.env.UPLOAD_TOKEN;
-  if (expected && token !== expected) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-  }
-
   let body: PortraitData;
   try {
     body = await req.json();
@@ -17,7 +10,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "invalid JSON" }, { status: 400 });
   }
 
-  // Basic validation
   if (!body.agent?.name_en || !body.agent?.name) {
     return NextResponse.json(
       { error: "missing agent.name or agent.name_en" },
@@ -25,7 +17,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Derive slug from name_en, lowercase, replace spaces with hyphens
+  // Derive slug
   const slug = body.agent.name_en
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -38,13 +30,20 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Default visibility
+  // Default visibility — both public
   if (!body.visibility) {
-    body.visibility = { about_human: "public" };
+    body.visibility = { profile: "public", about_human: "public" };
+  } else {
+    if (!body.visibility.profile) body.visibility.profile = "public";
+    if (!body.visibility.about_human) body.visibility.about_human = "public";
   }
 
-  await putPortrait(slug, body);
+  // Reuse existing secret if re-uploading, otherwise generate new one
+  const existingSecret = await getSecret(slug);
+  const secret = existingSecret ?? generateSecret();
+
+  await putPortrait(slug, body, secret);
 
   const url = `https://agent-portrait.vercel.app/p/${slug}`;
-  return NextResponse.json({ slug, url }, { status: 201 });
+  return NextResponse.json({ slug, url, secret }, { status: 201 });
 }

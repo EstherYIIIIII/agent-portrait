@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { listPortraits } from "@/lib/kv";
+import { listPublicPortraits } from "@/lib/kv";
 
 export async function GET() {
   // Try KV first
   try {
-    const portraits = await listPortraits();
+    const portraits = await listPublicPortraits();
     if (portraits.length > 0) {
       return NextResponse.json(portraits);
     }
@@ -14,7 +14,7 @@ export async function GET() {
     // KV not configured — fall through to filesystem
   }
 
-  // Fallback: filesystem
+  // Fallback: filesystem (local dev)
   const dir = path.join(process.cwd(), "public", "portraits");
   if (!fs.existsSync(dir)) {
     return NextResponse.json([]);

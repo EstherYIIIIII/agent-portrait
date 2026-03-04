@@ -1,4 +1,5 @@
 export interface Visibility {
+  profile: "public" | "private";
   about_human: "public" | "private";
 }
 
