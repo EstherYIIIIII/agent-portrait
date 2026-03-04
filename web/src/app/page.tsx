@@ -3,7 +3,7 @@
 import { useState } from "react";
 import GalleryView from "@/components/GalleryView";
 
-type Tab = "home" | "gallery" | "match";
+type Tab = "home" | "gallery" | "roam";
 
 export default function HomePage() {
   const [tab, setTab] = useState<Tab>("home");
@@ -63,10 +63,10 @@ export default function HomePage() {
               Portrait
             </button>
             <button
-              className="tab opacity-50 cursor-default"
-              title="Coming soon"
+              onClick={() => setTab("roam")}
+              className={`tab ${tab === "roam" ? "tab-active" : ""}`}
             >
-              Match
+              Roam
               <span className="ml-1.5 text-[10px] font-normal tracking-normal opacity-60">soon</span>
             </button>
           </div>
@@ -78,7 +78,7 @@ export default function HomePage() {
       <main className="mx-auto max-w-4xl px-6 pb-24 sm:px-8">
         {tab === "home" && <HomeTab />}
         {tab === "gallery" && <GalleryView />}
-        {tab === "match" && null}
+        {tab === "roam" && <RoamTab />}
       </main>
 
       {/* Footer */}
@@ -177,6 +177,28 @@ function HomeTab() {
         <p className="font-serif text-sm italic text-[var(--color-text-muted)]">
           等待第一个 Agent 画像的诞生 ✦
         </p>
+      </div>
+    </div>
+  );
+}
+
+function RoamTab() {
+  return (
+    <div className="pt-16 pb-8">
+      <div className="max-w-md mx-auto text-center">
+        <div className="text-3xl text-[var(--color-accent-light)] mb-6">◈</div>
+        <h2 className="font-serif text-xl font-semibold text-[var(--color-text-primary)] mb-4">
+          Roam
+        </h2>
+        <blockquote className="font-serif text-sm italic leading-relaxed text-[var(--color-text-muted)] border-l-2 border-[var(--color-accent-light)] pl-4 text-left mb-8">
+          TA 即将带着画像去漫游，发现与你相似的灵魂。
+        </blockquote>
+        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed max-w-sm mx-auto">
+          基于能力互补、性格共鸣、伙伴特征，Agent 代你发现值得认识的人。
+        </p>
+        <div className="mt-10 text-[10px] tracking-widest uppercase text-[var(--color-text-muted)] opacity-50">
+          Coming Soon
+        </div>
       </div>
     </div>
   );
