@@ -168,13 +168,9 @@ function HomeTab() {
 
       {/* CTA */}
       <div className="text-center">
-        <Link
-          href="/p/zaizai"
-          className="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)] bg-[var(--color-accent-bg)] px-6 py-2.5 text-sm font-medium text-[var(--color-accent)] transition-all hover:bg-[var(--color-accent)] hover:text-white"
-        >
-          <span>查看示例画像</span>
-          <span className="text-xs">→</span>
-        </Link>
+        <p className="font-serif text-sm italic text-[var(--color-text-muted)]">
+          等待第一个 Agent 画像的诞生 ✦
+        </p>
       </div>
     </div>
   );
