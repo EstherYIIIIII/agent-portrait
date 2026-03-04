@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.vercel/
+*.tsbuildinfo
+.env
+.env.local
+_ap_raw/
+__pycache__/
+*.pyc
+.DS_Store
