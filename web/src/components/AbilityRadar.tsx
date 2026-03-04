@@ -9,8 +9,6 @@ function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
   return { x: cx + r * Math.cos(angleRad), y: cy + r * Math.sin(angleRad) };
 }
 
-const accentColors = ["#b8a9e8", "#7ecfb8", "#e8a9c8", "#f0c27a", "#82aaff", "#ff9682"];
-
 export default function AbilityRadar({ abilities }: { abilities: Ability[] }) {
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -48,83 +46,56 @@ export default function AbilityRadar({ abilities }: { abilities: Ability[] }) {
   }));
 
   return (
-    <section className="section px-6 max-w-[680px] mx-auto" ref={ref}>
-      <div className="section-divider mb-12" />
-
-      <motion.h2
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-xs uppercase tracking-[0.2em] text-[var(--accent-lavender)] mb-8 text-center"
-      >
+    <section className="section" ref={ref}>
+      <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
         能力雷达
-      </motion.h2>
+      </h2>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="glass-card p-8 flex justify-center"
+        className="card p-8 flex justify-center"
       >
         <svg viewBox="0 0 300 300" className="w-full max-w-[280px]">
-          {/* Grid */}
           {gridPaths.map((d, i) => (
-            <path key={i} d={d} fill="none" stroke="rgba(184, 169, 232, 0.08)" strokeWidth="0.5" />
+            <path key={i} d={d} fill="none" stroke="#E8E0D6" strokeWidth="0.5" />
           ))}
 
-          {/* Axes */}
           {abilities.map((_, i) => {
             const p = polarToCartesian(cx, cy, maxR, i * angleStep);
-            return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="rgba(184, 169, 232, 0.06)" strokeWidth="0.5" />;
+            return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#E8E0D6" strokeWidth="0.5" />;
           })}
 
-          {/* Data area - glow */}
           <path
             d={dataPath}
-            fill="rgba(184, 169, 232, 0.08)"
-            stroke="none"
-            style={{ transition: "all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)", filter: "blur(4px)" }}
-          />
-
-          {/* Data area */}
-          <path
-            d={dataPath}
-            fill="rgba(184, 169, 232, 0.12)"
-            stroke="url(#radarGradient)"
+            fill="rgba(196, 149, 106, 0.1)"
+            stroke="#C4956A"
             strokeWidth="1.5"
-            style={{ transition: "all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)" }}
+            style={{ transition: "all 1s ease-out" }}
           />
 
-          {/* Gradient def */}
-          <defs>
-            <linearGradient id="radarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#b8a9e8" />
-              <stop offset="50%" stopColor="#7ecfb8" />
-              <stop offset="100%" stopColor="#e8a9c8" />
-            </linearGradient>
-          </defs>
-
-          {/* Data points */}
           {dataPoints.map((p, i) => (
             <circle
               key={i}
               cx={p.x}
               cy={p.y}
-              r="3"
-              fill={accentColors[i % accentColors.length]}
-              style={{ transition: "all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)" }}
+              r="3.5"
+              fill="#C4956A"
+              stroke="white"
+              strokeWidth="2"
+              style={{ transition: "all 1s ease-out" }}
             />
           ))}
 
-          {/* Labels */}
           {labelPoints.map((p, i) => (
             <g key={i}>
               <text
                 x={p.x}
-                y={p.y - 6}
+                y={p.y - 5}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                fill={accentColors[i % accentColors.length]}
+                fill="#5C5549"
                 fontSize="9"
                 fontWeight="500"
               >
@@ -132,10 +103,10 @@ export default function AbilityRadar({ abilities }: { abilities: Ability[] }) {
               </text>
               <text
                 x={p.x}
-                y={p.y + 6}
+                y={p.y + 7}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                fill="rgba(238, 238, 246, 0.3)"
+                fill="#8C8279"
                 fontSize="8"
               >
                 {p.score}

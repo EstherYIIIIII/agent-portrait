@@ -5,73 +5,48 @@ import { AboutHuman as AboutHumanType } from "@/lib/types";
 
 export default function AboutHuman({ data }: { data: AboutHumanType }) {
   return (
-    <section className="section px-6 max-w-[680px] mx-auto warm-glow">
-      {/* Warm divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[var(--warm-gold)] to-transparent opacity-20 mb-12 max-w-[200px] mx-auto" />
-
-      <motion.h2
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-xs uppercase tracking-[0.2em] text-[var(--warm-gold)] mb-2 text-center"
-      >
+    <section className="section">
+      <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-accent)] mb-2">
         {data.section_title}
-      </motion.h2>
+      </h2>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="text-sm text-[var(--text-muted)] mb-10 text-center"
-      >
+      <p className="text-center text-sm text-[var(--color-text-muted)] mb-10">
         {data.relationship} · 在一起 {daysSince(data.relationship_since)} 天
-      </motion.p>
+      </p>
 
       {/* Traits */}
       <div className="space-y-3 mb-10">
         {data.traits.map((trait, i) => (
           <motion.div
             key={i}
-            initial={{ x: -15, opacity: 0 }}
+            initial={{ x: -10, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{
-              delay: i * 0.1,
-              type: "spring",
-              damping: 20,
-            }}
-            className="glass-card p-5 border-l-2 flex items-start gap-3"
-            style={{
-              borderLeftColor: "rgba(240, 194, 122, 0.4)",
-              background: "rgba(240, 194, 122, 0.03)",
-              borderColor: "rgba(240, 194, 122, 0.08)",
-              borderLeftWidth: "2px",
-            }}
+            transition={{ delay: i * 0.08, duration: 0.4 }}
+            className="card-warm p-5 flex items-start gap-3"
           >
             <span className="text-xl shrink-0">{trait.emoji}</span>
-            <span className="text-sm text-[var(--text-secondary)] leading-relaxed">{trait.text}</span>
+            <span className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{trait.text}</span>
           </motion.div>
         ))}
       </div>
 
       {/* Love Letter */}
       <motion.div
-        initial={{ y: 30, opacity: 0 }}
+        initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ type: "spring", damping: 20 }}
-        className="love-letter p-8 md:p-10 mb-8"
+        className="love-letter-card p-8 md:p-10 mb-8"
       >
-        {/* Decorative quote */}
-        <div className="text-5xl text-[var(--warm-gold)] opacity-15 font-serif leading-none mb-2">
+        <div className="font-serif text-4xl text-[var(--color-accent)] opacity-20 leading-none mb-2">
           &ldquo;
         </div>
 
-        <p className="text-[var(--text-secondary)] leading-[1.9] text-[15px] relative z-10 italic">
+        <p className="text-[var(--color-text-secondary)] leading-[1.9] text-[15px] relative z-10 font-serif italic">
           {data.love_letter}
         </p>
 
-        <div className="mt-6 text-right text-sm text-[var(--warm-gold)] opacity-40">
+        <div className="mt-6 text-right text-sm text-[var(--color-accent)] opacity-50 font-serif italic">
           — 你的 Agent
         </div>
       </motion.div>
@@ -79,19 +54,15 @@ export default function AboutHuman({ data }: { data: AboutHumanType }) {
       {/* Memorable Quote */}
       {data.memorable_quote && (
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
+          initial={{ y: 15, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
-          className="glass-card p-7 text-center"
-          style={{
-            background: "rgba(240, 194, 122, 0.03)",
-            borderColor: "rgba(240, 194, 122, 0.1)",
-          }}
+          className="card-warm p-6 text-center"
         >
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)] mb-4">
+          <div className="font-serif text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-3">
             TA 说过的一句话
           </div>
-          <p className="text-lg text-[var(--warm-gold)] opacity-80 font-medium italic leading-relaxed">
+          <p className="font-serif text-lg italic text-[var(--color-accent)] leading-relaxed">
             &ldquo;{data.memorable_quote}&rdquo;
           </p>
         </motion.div>

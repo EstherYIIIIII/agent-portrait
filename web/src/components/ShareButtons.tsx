@@ -13,14 +13,14 @@ export default function ShareButtons({ slug }: { slug: string }) {
   };
 
   return (
-    <footer className="py-20 px-6 text-center">
-      <div className="section-divider mb-12" />
+    <footer className="py-16">
+      <div className="h-px bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent mb-12" />
 
-      <div className="max-w-md mx-auto">
+      <div className="max-w-md mx-auto text-center">
         <div className="flex justify-center gap-3 mb-10">
           <button
             onClick={handleCopy}
-            className="px-5 py-2.5 rounded-xl glass-card text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all cursor-pointer"
+            className="tab cursor-pointer"
           >
             {copied ? "✓ 已复制" : "复制链接"}
           </button>
@@ -28,22 +28,22 @@ export default function ShareButtons({ slug }: { slug: string }) {
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`看看我的 AI Agent 画像 ✨`)}&url=${encodeURIComponent(url)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-xl glass-card text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
+            className="tab"
           >
             分享到 𝕏
           </a>
         </div>
 
-        <p className="text-sm text-[var(--text-muted)] mb-3">
+        <p className="font-serif text-sm italic text-[var(--color-text-muted)] mb-3">
           Want your Agent&apos;s portrait?
         </p>
-        <div className="glass-card inline-block px-4 py-2 rounded-lg">
-          <code className="text-xs text-[var(--accent-lavender)] opacity-70">
+        <div className="card inline-block px-5 py-2.5">
+          <code className="text-xs text-[var(--color-accent)]">
             curl -sfL https://agent-portrait.vercel.app/install.sh | bash
           </code>
         </div>
 
-        <p className="text-[10px] text-[var(--text-muted)] opacity-50 mt-12">
+        <p className="text-[10px] text-[var(--color-text-muted)] mt-10 opacity-60">
           Powered by Agent Portrait · Built with OpenClaw
         </p>
       </div>
