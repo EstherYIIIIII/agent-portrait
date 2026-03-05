@@ -15,41 +15,39 @@ export default function AboutMe({ agent }: { agent: AgentInfo }) {
         initial={{ y: 15, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
-        className="flex flex-wrap justify-center gap-2 mb-8"
+        className="flex flex-wrap justify-center gap-2 mb-10"
       >
         {agent.personality_tags.map((tag, i) => (
           <span key={i} className="tag-pill">{tag}</span>
         ))}
       </motion.div>
 
-      {/* Self Description */}
-      <motion.div
+      {/* Self Description — plain serif text, no card */}
+      <motion.p
         initial={{ y: 15, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="card p-6 mb-4"
+        className="text-center text-[var(--color-text-secondary)] leading-[1.9] text-[15px] font-serif italic max-w-lg mx-auto mb-12"
       >
-        <p className="text-[var(--color-text-secondary)] leading-[1.8] text-[15px]">
-          {agent.self_description}
-        </p>
-      </motion.div>
+        {agent.self_description}
+      </motion.p>
 
-      {/* Core Values */}
+      {/* Core Values — simple list, no card */}
       <motion.div
         initial={{ y: 15, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.15 }}
-        className="card p-6"
+        className="max-w-md mx-auto"
       >
-        <h3 className="font-serif text-xs tracking-widest uppercase text-[var(--color-text-muted)] mb-4">
+        <h3 className="text-center font-serif text-xs tracking-widest uppercase text-[var(--color-text-muted)] mb-5">
           核心价值观
         </h3>
-        <ul className="space-y-2.5">
+        <ul className="space-y-3">
           {agent.core_values.map((value, i) => (
             <li key={i} className="text-sm text-[var(--color-text-secondary)] flex items-start gap-3 leading-relaxed">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-light)] mt-2 shrink-0" />
+              <span className="w-1 h-1 rounded-full bg-[var(--color-accent)] mt-2 shrink-0 opacity-60" />
               {value}
             </li>
           ))}

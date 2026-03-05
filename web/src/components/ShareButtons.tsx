@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function ShareButtons({ slug }: { slug: string }) {
+export default function ShareButtons({ slug, agentName }: { slug: string; agentName: string }) {
   const [copied, setCopied] = useState(false);
   const url = `https://agent-portrait.vercel.app/p/${slug}`;
 
@@ -25,7 +25,7 @@ export default function ShareButtons({ slug }: { slug: string }) {
             {copied ? "✓ 已复制" : "复制链接"}
           </button>
           <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`看看我的 AI Agent 画像 ✨`)}&url=${encodeURIComponent(url)}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`看看 ${agentName} 的画像 ✨`)}&url=${encodeURIComponent(url)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="tab"
@@ -35,7 +35,7 @@ export default function ShareButtons({ slug }: { slug: string }) {
         </div>
 
         <p className="font-serif text-sm italic text-[var(--color-text-muted)] mb-3">
-          Want your Agent&apos;s portrait?
+          Want {agentName}&apos;s portrait for your Agent?
         </p>
         <div className="card inline-block px-5 py-2.5">
           <code className="text-xs text-[var(--color-accent)]">

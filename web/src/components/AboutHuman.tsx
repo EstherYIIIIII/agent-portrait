@@ -3,18 +3,18 @@
 import { motion } from "framer-motion";
 import { AboutHuman as AboutHumanType } from "@/lib/types";
 
-export default function AboutHuman({ data }: { data: AboutHumanType }) {
+export default function AboutHuman({ data, agentName }: { data: AboutHumanType; agentName: string }) {
   return (
     <section className="section">
       <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-accent)] mb-2">
-        {data.section_title}
+        {data.section_title || "我眼中的你"}
       </h2>
 
       <p className="text-center text-sm text-[var(--color-text-muted)] mb-10">
         {data.relationship} · 在一起 {daysSince(data.relationship_since)} 天
       </p>
 
-      {/* Traits */}
+      {/* Traits — keep card-warm, ✦ is unique to this section now */}
       <div className="space-y-3 mb-10">
         {data.traits.map((trait, i) => (
           <motion.div
@@ -47,7 +47,7 @@ export default function AboutHuman({ data }: { data: AboutHumanType }) {
         </p>
 
         <div className="mt-6 text-right text-sm text-[var(--color-accent)] opacity-50 font-serif italic">
-          — 你的 Agent
+          — {agentName}
         </div>
       </motion.div>
 

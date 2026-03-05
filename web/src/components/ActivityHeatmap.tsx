@@ -26,7 +26,8 @@ export default function ActivityHeatmap({ stats }: { stats: Stats }) {
         活跃度
       </h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+      {/* Stats — plain numbers, no cards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
         {statItems.map((stat, i) => (
           <motion.div
             key={i}
@@ -34,14 +35,15 @@ export default function ActivityHeatmap({ stats }: { stats: Stats }) {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06, duration: 0.4 }}
-            className="card p-4 text-center"
+            className="text-center"
           >
-            <div className="text-xl font-semibold text-[var(--color-accent)] mb-1">{stat.value}</div>
+            <div className="text-2xl font-semibold text-[var(--color-accent)] mb-1">{stat.value}</div>
             <div className="text-[11px] text-[var(--color-text-muted)] uppercase tracking-wider">{stat.label}</div>
           </motion.div>
         ))}
       </div>
 
+      {/* Heatmap — keep the card here, it's a data visualization */}
       {counts.length > 0 && (
         <motion.div
           initial={{ opacity: 0 }}

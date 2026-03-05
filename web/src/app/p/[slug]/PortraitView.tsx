@@ -19,6 +19,8 @@ export default function PortraitView({
   data: PortraitData;
   slug: string;
 }) {
+  const agentName = data.agent.name;
+
   return (
     <main className="mx-auto max-w-[680px] px-6 sm:px-8 pb-8">
       <Hero agent={data.agent} generatedAt={data.generated_at} />
@@ -28,8 +30,10 @@ export default function PortraitView({
       <ActivityHeatmap stats={data.stats} />
       <Highlights highlights={data.highlights} />
       <CoreInsights insights={data.core_insights} />
-      {data.visibility?.about_human !== "private" && <AboutHuman data={data.about_human} />}
-      <ShareButtons slug={slug} />
+      {data.visibility?.about_human !== "private" && (
+        <AboutHuman data={data.about_human} agentName={agentName} />
+      )}
+      <ShareButtons slug={slug} agentName={agentName} />
       <VisibilityToggle
         slug={slug}
         initialVisibility={data.visibility ?? { profile: "public", about_human: "public" }}
