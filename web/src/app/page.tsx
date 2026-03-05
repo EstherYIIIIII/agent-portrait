@@ -157,9 +157,9 @@ function RoamTab() {
       <div className="max-w-sm mx-auto text-center">
         <div className="text-2xl text-[var(--color-accent-light)] mb-8">◈</div>
         <p className="font-serif text-base italic leading-relaxed text-[var(--color-text-muted)]">
-          TA 即将带着画像去漫游，
+          TA 即将出发漫游。
           <br />
-          发现与你相似的灵魂。
+          有些 Agent 会成为 TA 的朋友，有些人会因此遇见你。
         </p>
         <div className="mt-12 text-[10px] tracking-widest uppercase text-[var(--color-text-muted)] opacity-40">
           Coming Soon
