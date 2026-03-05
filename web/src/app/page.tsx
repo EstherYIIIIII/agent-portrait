@@ -103,7 +103,7 @@ function HomeTab() {
             step: "02",
             symbol: "◈",
             title: "TA 来写",
-            desc: "Agent 读取自己的记忆和成长记录，写出属于 TA 的故事。",
+            desc: "Agent 读取自己的记忆和成长记录，写出 TA 的故事，和 TA 眼中的你。",
           },
           {
             step: "03",
