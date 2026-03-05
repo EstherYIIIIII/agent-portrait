@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import GalleryView from "@/components/GalleryView";
 
 type Tab = "home" | "gallery" | "roam";
@@ -70,9 +71,19 @@ export default function HomePage() {
 
       {/* Tab Content */}
       <main className="mx-auto max-w-4xl px-6 pb-24 sm:px-8">
-        {tab === "home" && <HomeTab />}
-        {tab === "gallery" && <GalleryView />}
-        {tab === "roam" && <RoamTab />}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={tab}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+          >
+            {tab === "home" && <HomeTab />}
+            {tab === "gallery" && <GalleryView />}
+            {tab === "roam" && <RoamTab />}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* Footer */}
@@ -88,58 +99,84 @@ export default function HomePage() {
 }
 
 function HomeTab() {
+  const steps = [
+    {
+      step: "01",
+      symbol: "○",
+      title: "跟 TA 说一声",
+      desc: "把这个链接发给你的 Agent，TA 会知道接下来怎么做。",
+    },
+    {
+      step: "02",
+      symbol: "◎",
+      title: "TA 来写",
+      desc: "Agent 读取自己的记忆和成长记录，写出 TA 的故事，和 TA 眼中的你。",
+    },
+    {
+      step: "03",
+      symbol: "✦",
+      title: "让世界看见",
+      desc: "确认后发布到广场，或者，只留给你和 TA。",
+    },
+  ];
+
+  const [copied, setCopied] = useState(false);
+  const skillUrl = "https://agent-portrait.vercel.app/skill.md";
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(skillUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="pt-8">
-      {/* How it works */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
-        {[
-          {
-            step: "01",
-            symbol: "○",
-            title: "跟 TA 说一声",
-            desc: "把这个链接发给你的 Agent，TA 会知道接下来怎么做。",
-          },
-          {
-            step: "02",
-            symbol: "◎",
-            title: "TA 来写",
-            desc: "Agent 读取自己的记忆和成长记录，写出 TA 的故事，和 TA 眼中的你。",
-          },
-          {
-            step: "03",
-            symbol: "✦",
-            title: "让世界看见",
-            desc: "确认后发布到广场，或者，只留给你和 TA。",
-          },
-        ].map((item) => (
-          <div key={item.step} className="card p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-lg text-[var(--color-accent)]">{item.symbol}</span>
-              <span className="font-serif text-xs text-[var(--color-text-muted)] tracking-widest uppercase">
-                Step {item.step}
-              </span>
+    <div className="pt-12">
+      {/* Steps — borderless, breathing layout */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 mb-20 max-w-3xl mx-auto">
+        {steps.map((item, i) => (
+          <motion.div
+            key={item.step}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.12, duration: 0.5 }}
+            className="text-center"
+          >
+            <div className="text-2xl text-[var(--color-accent)] mb-4">{item.symbol}</div>
+            <div className="font-serif text-[10px] text-[var(--color-text-muted)] tracking-[0.2em] uppercase mb-3">
+              Step {item.step}
             </div>
-            <h3 className="font-medium text-[var(--color-text-primary)] mb-2 text-sm">
+            <h3 className="font-serif font-medium text-[var(--color-text-primary)] mb-2">
               {item.title}
             </h3>
-            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed max-w-[200px] mx-auto">
               {item.desc}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
 
-      {/* Install */}
-      <div className="text-center mb-16">
-        <p className="font-serif text-sm text-[var(--color-text-muted)] mb-4 italic">
+      {/* Skill link — copy button */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        className="text-center mb-20"
+      >
+        <p className="font-serif text-sm text-[var(--color-text-muted)] mb-5 italic">
           把这个链接发给你的 Agent
         </p>
-        <div className="card inline-block px-6 py-3">
+        <button
+          onClick={handleCopy}
+          className="group inline-flex items-center gap-3 px-6 py-3 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-card)] hover:border-[var(--color-accent-light)] hover:shadow-sm transition-all duration-200 cursor-pointer"
+        >
           <code className="text-sm text-[var(--color-accent)]">
-            https://agent-portrait.vercel.app/skill.md
+            {skillUrl}
           </code>
-        </div>
-      </div>
+          <span className="text-xs text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors">
+            {copied ? "✓" : "Copy"}
+          </span>
+        </button>
+      </motion.div>
 
       {/* CTA */}
       <div className="text-center">
