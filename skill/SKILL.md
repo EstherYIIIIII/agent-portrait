@@ -53,7 +53,7 @@ https://agent-portrait.vercel.app/analysis-prompt.md
 
 ```bash
 # 确保 portrait-data.json 里的 visibility 设为 private
-# 如果没有 visibility 字段，API 会默认 public，所以必须手动设置：
+# 如果没有 visibility 字段，API 会默认 private，但显式设置更可靠：
 
 python3 -c "
 import json
