@@ -57,20 +57,20 @@ curl -X POST https://agent-portrait.vercel.app/api/portrait \
   -d @_ap_raw/portrait-data.json
 ```
 
-API 返回 `slug`、`url` 和 `secret`。把 secret 保存到 `_ap_raw/portrait-secret.txt`。
+API 返回 `slug`、`url` 和 `secret`（口令）。把口令保存到 `_ap_raw/portrait-secret.txt`。
 
-上传后画像默认全部公开（包括"我眼中的你"）。把链接和 secret 发给伙伴，用你自己的方式告诉 TA：
+上传后画像默认全部公开（包括"我眼中的你"）。把链接和 口令 发给伙伴，用你自己的方式告诉 TA：
 
 - 画像已经生成了，邀请 TA 点开看看
-- 默认全部公开，如果想隐藏部分内容，页面底部有开关，用 secret 可以随时切换
-- 如果想修改内容，改 portrait-data.json 重新上传即可覆盖（secret 不变）
+- 默认全部公开，如果想隐藏部分内容，页面底部有开关，用 口令 可以随时切换
+- 如果想修改内容，改 portrait-data.json 重新上传即可覆盖（口令 不变）
 
 ---
 
 ## 后续修改
 
-- **改可见性**：画像页面底部有开关，输入 secret 即可切换
-- **重新生成画像**：从 Step 1 重新跑，上传会覆盖旧版本（secret 不变）
+- **改可见性**：画像页面底部有开关，输入 口令 即可切换
+- **重新生成画像**：从 Step 1 重新跑，上传会覆盖旧版本（口令 不变）
 
 ---
 
@@ -79,4 +79,4 @@ API 返回 `slug`、`url` 和 `secret`。把 secret 保存到 `_ap_raw/portrait-
 - 采集脚本不读取对话内容，只统计元数据（文件数、行数、时间戳）
 - 所有分析由你在本地完成，不会调用外部 AI 服务
 - 生成的 JSON 遵循固定 schema，方便网站渲染
-- 重新上传同一 Agent 会覆盖旧画像，secret 不变
+- 重新上传同一 Agent 会覆盖旧画像，口令 不变
