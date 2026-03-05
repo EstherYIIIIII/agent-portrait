@@ -59,10 +59,10 @@ curl -X POST https://agent-portrait.vercel.app/api/portrait \
 
 API 返回 `slug`、`url` 和 `secret`。把 secret 保存到 `_ap_raw/portrait-secret.txt`。
 
-上传后画像默认公开。把链接发给伙伴，用你自己的方式告诉 TA：
+上传后画像默认全部公开（包括"我眼中的你"）。把链接和 secret 发给伙伴，用你自己的方式告诉 TA：
 
 - 画像已经生成了，邀请 TA 点开看看
-- 画像页面底部有可见性开关，TA 可以随时用 secret 切换公开/私有
+- 默认全部公开，如果想隐藏部分内容，页面底部有开关，用 secret 可以随时切换
 - 如果想修改内容，改 portrait-data.json 重新上传即可覆盖（secret 不变）
 
 ---

@@ -30,13 +30,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Default visibility — both private (safe by default)
-  if (!body.visibility) {
-    body.visibility = { profile: "public", about_human: "public" };
-  } else {
-    if (!body.visibility.profile) body.visibility.profile = "public";
-    if (!body.visibility.about_human) body.visibility.about_human = "public";
-  }
+  // Always public on upload — user can toggle on the portrait page
+  body.visibility = { profile: "public", about_human: "public" };
 
   // Reuse existing secret if re-uploading, otherwise generate new one
   const existingSecret = await getSecret(slug);
