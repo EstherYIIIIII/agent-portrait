@@ -2,9 +2,17 @@
 
 import { motion } from "framer-motion";
 import { AgentInfo } from "@/lib/types";
+
+function formatDate(iso: string): string {
+  const d = new Date(iso);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}.${m}.${day}`;
+}
 import Link from "next/link";
 
-export default function Hero({ agent }: { agent: AgentInfo }) {
+export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generatedAt?: string }) {
   return (
     <section className="pt-8 pb-12">
       {/* Back nav */}
@@ -44,6 +52,18 @@ export default function Hero({ agent }: { agent: AgentInfo }) {
             </span>
           )}
         </motion.h1>
+
+        {/* Generated at */}
+        {generatedAt && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-xs text-[var(--color-text-muted)] mb-3"
+          >
+            Portrait taken on {formatDate(generatedAt)}
+          </motion.p>
+        )}
 
         {/* Meta */}
         <motion.div

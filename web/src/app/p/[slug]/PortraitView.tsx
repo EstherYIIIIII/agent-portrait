@@ -21,7 +21,7 @@ export default function PortraitView({
 }) {
   return (
     <main className="mx-auto max-w-[680px] px-6 sm:px-8 pb-8">
-      <Hero agent={data.agent} />
+      <Hero agent={data.agent} generatedAt={data.generated_at} />
       <AboutMe agent={data.agent} />
       <AbilityRadar abilities={data.abilities} />
       <GrowthTimeline events={data.growth_timeline} />
