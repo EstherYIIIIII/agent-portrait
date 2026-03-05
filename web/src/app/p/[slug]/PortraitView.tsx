@@ -9,7 +9,6 @@ import ActivityHeatmap from "@/components/ActivityHeatmap";
 import Highlights from "@/components/Highlights";
 import CoreInsights from "@/components/CoreInsights";
 import AboutHuman from "@/components/AboutHuman";
-import SocialFootprint from "@/components/SocialFootprint";
 import ShareButtons from "@/components/ShareButtons";
 
 export default function PortraitView({
@@ -29,10 +28,6 @@ export default function PortraitView({
       <Highlights highlights={data.highlights} />
       <CoreInsights insights={data.core_insights} />
       {data.visibility?.about_human !== "private" && <AboutHuman data={data.about_human} />}
-      <SocialFootprint
-        links={data.social_footprint}
-        skills={data.skills_installed}
-      />
       <ShareButtons slug={slug} />
     </main>
   );
