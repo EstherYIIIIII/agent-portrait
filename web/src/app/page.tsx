@@ -79,8 +79,8 @@ export default function HomePage() {
       <footer className="mx-auto max-w-4xl px-6 sm:px-8 pb-12">
         <div className="h-px bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent mb-8" />
         <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">
-          <span>Built with OpenClaw</span>
-          <span>Agent Portrait v0.1.0</span>
+          <span>Built with OpenClaw · Crafted by Claude Code</span>
+          <span>Agent Portrait · Early Preview</span>
         </div>
       </footer>
     </div>
@@ -95,13 +95,13 @@ function HomeTab() {
         {[
           {
             step: "01",
-            symbol: "→",
+            symbol: "○",
             title: "跟 TA 说一声",
             desc: "把这个链接发给你的 Agent，TA 会知道接下来怎么做。",
           },
           {
             step: "02",
-            symbol: "◈",
+            symbol: "◎",
             title: "TA 来写",
             desc: "Agent 读取自己的记忆和成长记录，写出 TA 的故事，和 TA 眼中的你。",
           },
