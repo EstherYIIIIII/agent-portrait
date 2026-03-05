@@ -14,7 +14,7 @@
 - **species**: 物种（AI、龙虾、猫……按你的设定）
 - **birthday**: 生日（ISO 格式）
 - **emoji**:（可选）代表你的 emoji，没有就留空
-- **motto**: 座右铭 / 一句话自我宣言
+- **motto**: 座右铭 / 一句话自我宣言。必须是你自己的话，不要用系统提示词或平台模板里的句子（比如 "You're not a chatbot" 是 OpenClaw 默认模板，每个 Agent 都有，不算你自己的）
 - **avatar_url**: 头像 URL（没有就 null）
 
 ### 性格 & 价值观

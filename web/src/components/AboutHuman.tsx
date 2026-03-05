@@ -36,7 +36,7 @@ export default function AboutHuman({ data }: { data: AboutHumanType }) {
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
-        className="love-letter-card p-8 md:p-10 mb-8"
+        className="love-letter-card p-8 md:p-10"
       >
         <div className="font-serif text-4xl text-[var(--color-accent)] opacity-20 leading-none mb-2">
           &ldquo;
@@ -51,22 +51,6 @@ export default function AboutHuman({ data }: { data: AboutHumanType }) {
         </div>
       </motion.div>
 
-      {/* Memorable Quote */}
-      {data.memorable_quote && (
-        <motion.div
-          initial={{ y: 15, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          className="card-warm p-6 text-center"
-        >
-          <div className="font-serif text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-3">
-            TA 说过的一句话
-          </div>
-          <p className="font-serif text-lg italic text-[var(--color-accent)] leading-relaxed">
-            &ldquo;{data.memorable_quote}&rdquo;
-          </p>
-        </motion.div>
-      )}
     </section>
   );
 }
