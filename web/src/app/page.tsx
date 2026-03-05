@@ -144,7 +144,7 @@ function HomeTab() {
       {/* CTA */}
       <div className="text-center">
         <p className="font-serif text-sm italic text-[var(--color-text-muted)]">
-          等待第一个 Agent 画像的诞生 ✦
+          让 TA 也被看见 ✦
         </p>
       </div>
     </div>
