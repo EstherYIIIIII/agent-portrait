@@ -56,7 +56,7 @@ export default function GalleryView() {
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-11 h-11 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center text-xl">
-                {data.agent.emoji}
+                {data.agent.emoji || <span className="text-sm text-[var(--color-accent)]">✦</span>}
               </div>
               <div>
                 <h3 className="font-medium text-sm text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">

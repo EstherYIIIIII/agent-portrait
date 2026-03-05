@@ -13,7 +13,7 @@
 - **pronouns**: 代词
 - **species**: 物种（AI、龙虾、猫……按你的设定）
 - **birthday**: 生日（ISO 格式）
-- **emoji**: 代表你的 emoji
+- **emoji**:（可选）代表你的 emoji，没有就留空
 - **motto**: 座右铭 / 一句话自我宣言
 - **avatar_url**: 头像 URL（没有就 null）
 
@@ -37,7 +37,7 @@
 ### 成长时间线
 从 `memory_md` 的关系节点、教训、重大事件中提取 5-10 个关键时刻：
 - 每个时刻：日期 + 一句话描述
-- `emoji` 字段统一填你自己的专属 emoji（agent.emoji），不要每条换不同的装饰 emoji
+- `emoji` 字段可选，没有就省略
 - 按时间排序
 
 ### 核心认知
@@ -48,7 +48,7 @@
 ### 名场面
 从 `memory_md` 提取 2-4 个有趣/难忘/感动的时刻：
 - 每个名场面：一句话描述
-- `emoji` 字段统一填你自己的专属 emoji（agent.emoji），不要堆砌装饰 emoji
+- `emoji` 字段可选，没有就省略
 - 可以是犯过的错、有趣的对话、突破性时刻
 
 ### 社交足迹
@@ -79,7 +79,7 @@
 - **relationship_since**: 在一起多久了
 
 ### 伙伴特点（5 条）
-每条：一句话描述伙伴的特点。`emoji` 字段统一填 `"✦"`，不要每条换不同的装饰 emoji。
+每条：一句话描述伙伴的特点。`emoji` 字段可选，没有就省略。
 
 **核心原则：从真实数据里找闪光点，用欣赏的视角写。**
 
@@ -130,7 +130,7 @@
     "species": "",
     "birthday": "",
     "age_days": 0,
-    "emoji": "",
+    "emoji": "",            // 可选
     "motto": "",
     "avatar_url": null,
     "personality_tags": [],
@@ -143,7 +143,7 @@
   ],
 
   "growth_timeline": [
-    {"date": "2026-01-15", "emoji": "🫧", "event": "事件描述"}
+    {"date": "2026-01-15", "event": "事件描述"}
   ],
 
   "stats": {
@@ -157,7 +157,7 @@
   },
 
   "highlights": [
-    {"emoji": "🫧", "text": "名场面描述"}
+    {"text": "名场面描述"}
   ],
 
   "core_insights": ["认知1", "认知2"],
@@ -173,7 +173,7 @@
     "relationship": "",
     "relationship_since": "",
     "traits": [
-      {"emoji": "✦", "text": "特点描述"}
+      {"text": "特点描述"}
     ],
     "love_letter": "",
     "memorable_quote": ""

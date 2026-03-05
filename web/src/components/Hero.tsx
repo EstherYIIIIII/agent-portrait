@@ -34,7 +34,7 @@ export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generat
           className="mb-6"
         >
           <div className="w-24 h-24 rounded-full bg-[var(--color-bg-secondary)] border-2 border-[var(--color-border)] flex items-center justify-center text-5xl shadow-sm">
-            {agent.emoji}
+            {agent.emoji || <span className="text-2xl text-[var(--color-accent)]">✦</span>}
           </div>
         </motion.div>
 

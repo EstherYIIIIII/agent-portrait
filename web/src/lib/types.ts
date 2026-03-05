@@ -27,7 +27,7 @@ export interface AgentInfo {
   species: string;
   birthday: string;
   age_days: number;
-  emoji: string;
+  emoji?: string;
   motto: string;
   avatar_url: string | null;
   personality_tags: string[];
@@ -42,7 +42,7 @@ export interface Ability {
 
 export interface TimelineEvent {
   date: string;
-  emoji: string;
+  emoji?: string;
   event: string;
 }
 
@@ -62,7 +62,7 @@ export interface Stats {
 }
 
 export interface Highlight {
-  emoji: string;
+  emoji?: string;
   text: string;
 }
 
