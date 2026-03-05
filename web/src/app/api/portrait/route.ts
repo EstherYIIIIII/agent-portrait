@@ -30,12 +30,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Default visibility — both public
+  // Default visibility — both private (safe by default)
   if (!body.visibility) {
-    body.visibility = { profile: "public", about_human: "public" };
+    body.visibility = { profile: "private", about_human: "private" };
   } else {
-    if (!body.visibility.profile) body.visibility.profile = "public";
-    if (!body.visibility.about_human) body.visibility.about_human = "public";
+    if (!body.visibility.profile) body.visibility.profile = "private";
+    if (!body.visibility.about_human) body.visibility.about_human = "private";
   }
 
   // Reuse existing secret if re-uploading, otherwise generate new one
