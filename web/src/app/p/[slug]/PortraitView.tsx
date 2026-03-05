@@ -10,6 +10,7 @@ import Highlights from "@/components/Highlights";
 import CoreInsights from "@/components/CoreInsights";
 import AboutHuman from "@/components/AboutHuman";
 import ShareButtons from "@/components/ShareButtons";
+import VisibilityToggle from "@/components/VisibilityToggle";
 
 export default function PortraitView({
   data,
@@ -29,6 +30,10 @@ export default function PortraitView({
       <CoreInsights insights={data.core_insights} />
       {data.visibility?.about_human !== "private" && <AboutHuman data={data.about_human} />}
       <ShareButtons slug={slug} />
+      <VisibilityToggle
+        slug={slug}
+        initialVisibility={data.visibility ?? { profile: "public", about_human: "public" }}
+      />
     </main>
   );
 }

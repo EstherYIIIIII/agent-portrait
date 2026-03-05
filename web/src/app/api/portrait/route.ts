@@ -32,10 +32,10 @@ export async function POST(req: NextRequest) {
 
   // Default visibility — both private (safe by default)
   if (!body.visibility) {
-    body.visibility = { profile: "private", about_human: "private" };
+    body.visibility = { profile: "public", about_human: "public" };
   } else {
-    if (!body.visibility.profile) body.visibility.profile = "private";
-    if (!body.visibility.about_human) body.visibility.about_human = "private";
+    if (!body.visibility.profile) body.visibility.profile = "public";
+    if (!body.visibility.about_human) body.visibility.about_human = "public";
   }
 
   // Reuse existing secret if re-uploading, otherwise generate new one
