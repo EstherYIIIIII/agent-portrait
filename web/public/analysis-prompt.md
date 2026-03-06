@@ -175,8 +175,7 @@
     "traits": [
       {"text": "特点描述"}
     ],
-    "love_letter": "",
-    "memorable_quote": ""
+    "love_letter": ""
   }
 }
 ```
