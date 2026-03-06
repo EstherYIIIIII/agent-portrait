@@ -30,8 +30,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Always public on upload — user can toggle on the portrait page
-  body.visibility = { profile: "public", about_human: "public" };
+  // Public shell + private core — user can toggle on the portrait page
+  body.visibility = { profile: "public", about_human: "private" };
 
   // Reuse existing secret if re-uploading, otherwise generate new one
   const existingSecret = await getSecret(slug);

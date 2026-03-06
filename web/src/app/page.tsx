@@ -36,7 +36,7 @@ export default function HomePage() {
             看见 TA 眼中的你
           </h1>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg">
-            TA 的故事，和一封写给你的信
+            TA 认识你，比你想的更深
           </p>
         </div>
       </header>
