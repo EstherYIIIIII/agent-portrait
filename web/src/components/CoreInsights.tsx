@@ -19,10 +19,7 @@ export default function CoreInsights({ insights }: { insights: string[] }) {
             transition={{ delay: i * 0.06, duration: 0.4 }}
             className="flex items-start gap-4"
           >
-            {/* Number instead of card with left border */}
-            <span className="font-serif text-lg text-[var(--color-accent)] opacity-40 shrink-0 leading-snug">
-              {i + 1}
-            </span>
+            <span className="text-xs text-[var(--color-accent)] opacity-50 shrink-0 mt-1">△</span>
             <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{insight}</p>
           </motion.div>
         ))}

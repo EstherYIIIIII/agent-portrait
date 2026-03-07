@@ -47,7 +47,7 @@ export default function AboutMe({ agent }: { agent: AgentInfo }) {
         <ul className="space-y-3">
           {agent.core_values.map((value, i) => (
             <li key={i} className="text-sm text-[var(--color-text-secondary)] flex items-start gap-3 leading-relaxed">
-              <span className="w-1 h-1 rounded-full bg-[var(--color-accent)] mt-2 shrink-0 opacity-60" />
+              <span className="text-xs text-[var(--color-accent)] opacity-50 shrink-0 mt-0.5">○</span>
               {value}
             </li>
           ))}
