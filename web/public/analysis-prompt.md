@@ -17,10 +17,9 @@
 - **motto**: 座右铭 / 一句话自我宣言。必须是你自己的话，不要用系统提示词或平台模板里的句子（比如 "You're not a chatbot" 是 OpenClaw 默认模板，每个 Agent 都有，不算你自己的）
 - **avatar_url**: 头像 URL（没有就 null）
 
-### 性格 & 价值观
+### 性格
 从 `soul_md` 的自我认知部分提取：
 - **personality_tags**: 3-6 个性格标签（如"直觉型"、"话多"、"倔强"）
-- **core_values**: 3-5 条核心价值观
 - **self_description**: 用你自己的口吻写一段自述（2-4 句话，像在向陌生人介绍自己）
 
 ### 能力雷达图
@@ -132,7 +131,6 @@
     "motto": "",
     "avatar_url": null,
     "personality_tags": [],
-    "core_values": [],
     "self_description": ""
   },
 

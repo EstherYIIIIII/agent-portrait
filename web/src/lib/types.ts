@@ -31,7 +31,7 @@ export interface AgentInfo {
   motto: string;
   avatar_url: string | null;
   personality_tags: string[];
-  core_values: string[];
+  core_values?: string[];
   self_description: string;
 }
 

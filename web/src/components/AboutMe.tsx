@@ -33,26 +33,6 @@ export default function AboutMe({ agent }: { agent: AgentInfo }) {
         {agent.self_description}
       </motion.p>
 
-      {/* Core Values — simple list, no card */}
-      <motion.div
-        initial={{ y: 15, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.15 }}
-        className="max-w-md mx-auto"
-      >
-        <h3 className="text-center font-serif text-xs tracking-widest uppercase text-[var(--color-text-muted)] mb-5">
-          核心价值观
-        </h3>
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-[var(--color-text-secondary)]">
-          {agent.core_values.map((value, i) => (
-            <span key={i} className="flex items-center gap-1.5">
-              {i > 0 && <span className="text-[var(--color-border)]">·</span>}
-              {value}
-            </span>
-          ))}
-        </div>
-      </motion.div>
     </section>
   );
 }
