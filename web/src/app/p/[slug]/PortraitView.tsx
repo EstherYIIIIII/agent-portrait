@@ -9,7 +9,7 @@ import ActivityHeatmap from "@/components/ActivityHeatmap";
 import Highlights from "@/components/Highlights";
 import CoreInsights from "@/components/CoreInsights";
 import AboutHuman from "@/components/AboutHuman";
-import Relationship from "@/components/Relationship";
+
 import ShareButtons from "@/components/ShareButtons";
 import VisibilityToggle from "@/components/VisibilityToggle";
 
@@ -37,7 +37,6 @@ export default function PortraitView({
       {showPrivate && (
         <>
           <AboutHuman data={data.about_human} agentName={agentName} />
-          <Relationship data={data.about_human} agentName={agentName} />
         </>
       )}
       <ShareButtons slug={slug} agentName={agentName} />
