@@ -18,9 +18,7 @@ export default function Highlights({ highlights }: { highlights: Highlight[] }) 
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.4 }}
-            className="flex items-start gap-3"
           >
-            <span className="text-xs text-[var(--color-accent)] opacity-50 shrink-0 mt-1">◈</span>
             <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{h.text}</p>
           </motion.div>
         ))}

@@ -17,9 +17,7 @@ export default function CoreInsights({ insights }: { insights: string[] }) {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06, duration: 0.4 }}
-            className="flex items-start gap-4"
           >
-            <span className="text-xs text-[var(--color-accent)] opacity-50 shrink-0 mt-1">△</span>
             <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{insight}</p>
           </motion.div>
         ))}

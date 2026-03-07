@@ -15,7 +15,7 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
       </p>
 
       {/* Traits — clean text, no symbols, emotional section */}
-      <div className="space-y-4 mb-12 max-w-lg mx-auto">
+      <div className="space-y-4 mb-12">
         {data.traits.map((trait, i) => (
           <motion.div
             key={i}
@@ -24,7 +24,7 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.4 }}
           >
-            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8] text-center">{trait.text}</p>
+            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{trait.text}</p>
           </motion.div>
         ))}
       </div>
