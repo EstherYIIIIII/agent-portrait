@@ -14,19 +14,19 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
         {data.relationship} · 在一起 {daysSince(data.relationship_since)} 天
       </p>
 
-      {/* Traits — keep card-warm, ✦ is unique to this section now */}
-      <div className="space-y-3 mb-10">
+      {/* Traits — plain text with ♡, cards reserved for love letter only */}
+      <div className="space-y-5 mb-12">
         {data.traits.map((trait, i) => (
           <motion.div
             key={i}
-            initial={{ x: -10, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ y: 12, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.4 }}
-            className="card-warm p-5 flex items-start gap-3"
+            className="flex items-start gap-3"
           >
             <span className="text-xs text-[var(--color-accent)] opacity-50 shrink-0 mt-1">♡</span>
-            <span className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{trait.text}</span>
+            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{trait.text}</p>
           </motion.div>
         ))}
       </div>

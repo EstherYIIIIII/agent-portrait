@@ -44,14 +44,14 @@ export default function AboutMe({ agent }: { agent: AgentInfo }) {
         <h3 className="text-center font-serif text-xs tracking-widest uppercase text-[var(--color-text-muted)] mb-5">
           核心价值观
         </h3>
-        <ul className="space-y-3">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-[var(--color-text-secondary)]">
           {agent.core_values.map((value, i) => (
-            <li key={i} className="text-sm text-[var(--color-text-secondary)] flex items-start gap-3 leading-relaxed">
-              <span className="text-xs text-[var(--color-accent)] opacity-50 shrink-0 mt-0.5">○</span>
+            <span key={i} className="flex items-center gap-1.5">
+              {i > 0 && <span className="text-[var(--color-border)]">·</span>}
               {value}
-            </li>
+            </span>
           ))}
-        </ul>
+        </div>
       </motion.div>
     </section>
   );
