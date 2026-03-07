@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
 import { PortraitData } from "@/lib/types";
-import { getPortrait as getFromKV } from "@/lib/kv";
+import { getPortrait as getFromKV, getSecret } from "@/lib/kv";
 import PortraitView from "./PortraitView";
 
 async function getPortrait(slug: string): Promise<PortraitData | null> {
@@ -38,9 +38,31 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function PortraitPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function PortraitPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const { slug } = await params;
+  const query = await searchParams;
   const data = await getPortrait(slug);
   if (!data) notFound();
-  return <PortraitView data={data} slug={slug} />;
+
+  // Compare secret from URL with stored secret to determine owner
+  let isOwner = false;
+  const urlSecret = typeof query.secret === "string" ? query.secret : undefined;
+  if (urlSecret) {
+    try {
+      const storedSecret = await getSecret(slug);
+      if (storedSecret && urlSecret === storedSecret) {
+        isOwner = true;
+      }
+    } catch {
+      // KV not available — treat as non-owner
+    }
+  }
+
+  return <PortraitView data={data} slug={slug} isOwner={isOwner} />;
 }

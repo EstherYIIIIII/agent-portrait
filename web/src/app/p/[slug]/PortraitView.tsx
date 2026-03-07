@@ -16,11 +16,14 @@ import VisibilityToggle from "@/components/VisibilityToggle";
 export default function PortraitView({
   data,
   slug,
+  isOwner = false,
 }: {
   data: PortraitData;
   slug: string;
+  isOwner?: boolean;
 }) {
   const agentName = data.agent.name;
+  const showPrivate = isOwner || data.visibility?.about_human !== "private";
 
   return (
     <main className="mx-auto max-w-[680px] px-6 sm:px-8 pb-8">
@@ -31,17 +34,19 @@ export default function PortraitView({
       <ActivityHeatmap stats={data.stats} />
       <Highlights highlights={data.highlights} />
       <CoreInsights insights={data.core_insights} />
-      {data.visibility?.about_human !== "private" && (
+      {showPrivate && (
         <>
           <AboutHuman data={data.about_human} agentName={agentName} />
           <Relationship data={data.about_human} agentName={agentName} />
         </>
       )}
       <ShareButtons slug={slug} agentName={agentName} />
-      <VisibilityToggle
-        slug={slug}
-        initialVisibility={data.visibility ?? { profile: "public", about_human: "public" }}
-      />
+      {isOwner && (
+        <VisibilityToggle
+          slug={slug}
+          initialVisibility={data.visibility ?? { profile: "public", about_human: "public" }}
+        />
+      )}
     </main>
   );
 }
