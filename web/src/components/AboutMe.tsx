@@ -7,7 +7,7 @@ export default function AboutMe({ agent }: { agent: AgentInfo }) {
   return (
     <section className="section">
       <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
-        关于我
+        <span className="mr-2 text-[var(--color-accent)] opacity-60">○</span>关于我
       </h2>
 
       {/* Personality Tags */}

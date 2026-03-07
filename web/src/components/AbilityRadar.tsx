@@ -48,7 +48,7 @@ export default function AbilityRadar({ abilities }: { abilities: Ability[] }) {
   return (
     <section className="section" ref={ref}>
       <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
-        能力雷达
+        <span className="mr-2 text-[var(--color-accent)] opacity-60">◇</span>能力雷达
       </h2>
 
       <motion.div

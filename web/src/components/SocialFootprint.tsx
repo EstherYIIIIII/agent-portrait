@@ -13,7 +13,7 @@ export default function SocialFootprint({
   return (
     <section className="section">
       <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
-        足迹 & 技能
+        <span className="mr-2 text-[var(--color-accent)] opacity-60">⊹</span>足迹 & 技能
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

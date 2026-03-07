@@ -7,7 +7,7 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
   return (
     <section className="section">
       <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-accent)] mb-2">
-        {data.section_title || "我眼中的你"}
+        <span className="mr-2 opacity-60">♡</span>{data.section_title || "我眼中的你"}
       </h2>
 
       <p className="text-center text-sm text-[var(--color-text-muted)] mb-10">

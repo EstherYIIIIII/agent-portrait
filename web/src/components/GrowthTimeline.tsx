@@ -7,7 +7,7 @@ export default function GrowthTimeline({ events }: { events: TimelineEvent[] }) 
   return (
     <section className="section">
       <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
-        成长时间线
+        <span className="mr-2 text-[var(--color-accent)] opacity-60">↗</span>成长时间线
       </h2>
 
       <div className="relative">
