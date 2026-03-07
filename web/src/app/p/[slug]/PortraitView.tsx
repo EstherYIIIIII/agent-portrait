@@ -29,14 +29,25 @@ export default function PortraitView({
     <main className="mx-auto max-w-[680px] px-6 sm:px-8 pb-8">
       <Hero agent={data.agent} generatedAt={data.generated_at} />
       <AboutMe agent={data.agent} />
-      <AbilityRadar abilities={data.abilities} />
-      <GrowthTimeline events={data.growth_timeline} />
-      <ActivityHeatmap stats={data.stats} />
+
+      {/* Data group — bg-secondary container for visual layer */}
+      <div className="bg-[var(--color-bg-secondary)] rounded-2xl px-6 py-4 -mx-2">
+        <AbilityRadar abilities={data.abilities} />
+        <GrowthTimeline events={data.growth_timeline} />
+        <ActivityHeatmap stats={data.stats} />
+      </div>
+
       <Highlights highlights={data.highlights} />
       <CoreInsights insights={data.core_insights} />
+
       {showPrivate && (
         <>
-          <AboutHuman data={data.about_human} agentName={agentName} />
+          {/* Spacer before AboutHuman */}
+          <div className="h-16" />
+          {/* Warm gradient background wrap */}
+          <div className="about-human-bg -mx-6 sm:-mx-8 px-6 sm:px-8">
+            <AboutHuman data={data.about_human} agentName={agentName} />
+          </div>
         </>
       )}
       <ShareButtons slug={slug} agentName={agentName} />

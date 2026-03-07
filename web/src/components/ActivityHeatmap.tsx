@@ -21,9 +21,9 @@ export default function ActivityHeatmap({ stats }: { stats: Stats }) {
   ];
 
   return (
-    <section className="section">
-      <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
-        <span className="mr-2 text-[var(--color-accent)] opacity-60">∷</span>活跃度
+    <section className="section-compact">
+      <h2 className="text-xs font-medium text-[var(--color-text-muted)] tracking-widest uppercase mb-5">
+        活跃度
       </h2>
 
       {/* Stats — plain numbers, no cards */}

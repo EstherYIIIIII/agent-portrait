@@ -30,6 +30,7 @@ export interface AgentInfo {
   emoji?: string;
   motto: string;
   avatar_url: string | null;
+  cover_url?: string | null;
   personality_tags: string[];
   core_values?: string[];
   self_description: string;

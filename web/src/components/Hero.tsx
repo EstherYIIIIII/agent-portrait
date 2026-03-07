@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { AgentInfo } from "@/lib/types";
+import Link from "next/link";
 
 function formatDate(iso: string): string {
   const d = new Date(iso);
@@ -10,13 +11,12 @@ function formatDate(iso: string): string {
   const day = String(d.getDate()).padStart(2, "0");
   return `${y}.${m}.${day}`;
 }
-import Link from "next/link";
 
 export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generatedAt?: string }) {
   return (
-    <section className="pt-8 pb-12">
+    <section className="pb-12">
       {/* Back nav */}
-      <nav className="mb-16">
+      <nav className="pt-8 px-6 mb-0">
         <Link
           href="/"
           className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
@@ -25,20 +25,40 @@ export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generat
         </Link>
       </nav>
 
+      {/* Cover area — full width, negative margin to cancel main px-6 */}
+      <div className="relative -mx-6 sm:-mx-8">
+        {agent.cover_url ? (
+          <div className="w-full aspect-[3/2] max-h-[280px] overflow-hidden">
+            <img
+              src={agent.cover_url}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ) : (
+          <div
+            className="w-full aspect-[3/2] max-h-[280px]"
+            style={{
+              background: "linear-gradient(135deg, #F5E6D3 0%, #E8D5C0 30%, #D4A574 70%, #C4956A 100%)",
+            }}
+          />
+        )}
+      </div>
+
+      {/* Avatar overlapping cover bottom */}
       <div className="flex flex-col items-center text-center">
-        {/* Avatar */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", damping: 15, stiffness: 200 }}
-          className="mb-6"
+          className="-mt-12 mb-6"
         >
-          <div className="w-24 h-24 rounded-full bg-[var(--color-bg-secondary)] border-2 border-[var(--color-border)] flex items-center justify-center text-5xl shadow-sm">
+          <div className="w-24 h-24 rounded-full bg-[var(--color-bg-secondary)] border-4 border-[var(--color-bg-primary)] flex items-center justify-center text-5xl shadow-md">
             {agent.emoji || <span className="text-2xl text-[var(--color-accent)]">✦</span>}
           </div>
         </motion.div>
 
-        {/* Name */}
+        {/* Name: 崽崽 · ZaiZai */}
         <motion.h1
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -47,9 +67,12 @@ export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generat
         >
           {agent.name}
           {agent.name_en && (
-            <span className="text-[var(--color-text-muted)] text-2xl ml-3 font-normal">
-              {agent.name_en}
-            </span>
+            <>
+              <span className="text-[var(--color-text-muted)] text-4xl sm:text-5xl mx-2 font-light"> · </span>
+              <span className="text-[var(--color-text-muted)] text-4xl sm:text-5xl font-normal">
+                {agent.name_en}
+              </span>
+            </>
           )}
         </motion.h1>
 
@@ -64,24 +87,6 @@ export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generat
             Portrait taken on {formatDate(generatedAt)}
           </motion.p>
         )}
-
-        {/* Meta */}
-        <motion.div
-          initial={{ y: 15, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.25, duration: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-[var(--color-text-muted)] mb-5"
-        >
-          <span>{agent.species}</span>
-          <span className="text-[var(--color-border)]">·</span>
-          <span>{agent.pronouns}</span>
-          <span className="text-[var(--color-border)]">·</span>
-          <span>{agent.birthday}</span>
-          <span className="text-[var(--color-border)]">·</span>
-          <span>
-            已存活 <strong className="text-[var(--color-accent)]">{agent.age_days}</strong> 天
-          </span>
-        </motion.div>
 
         {/* Motto */}
         <motion.p

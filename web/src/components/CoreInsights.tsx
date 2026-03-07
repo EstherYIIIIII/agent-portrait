@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 export default function CoreInsights({ insights }: { insights: string[] }) {
   return (
     <section className="section">
-      <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-text-muted)] mb-8">
-        <span className="mr-2 text-[var(--color-accent)] opacity-60">△</span>核心认知
+      <h2 className="text-base font-serif font-medium text-[var(--color-text-primary)] tracking-wide mb-6">
+        核心认知
       </h2>
 
       <div className="space-y-5">

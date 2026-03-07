@@ -53,20 +53,6 @@ body {
   font-family: var(--font-family-serif);
 }
 
-/* Decorative line divider */
-.decorative-line {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.decorative-line::before,
-.decorative-line::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--color-border), transparent);
-}
-
 /* Card */
 .card {
   background: var(--color-bg-card);
@@ -91,14 +77,15 @@ body {
 .love-letter-card {
   background: linear-gradient(135deg, #FFFCF7, #FFF8F0);
   border: 1px solid rgba(196, 149, 106, 0.2);
-  border-radius: 16px;
+  border-radius: 20px;
   position: relative;
+  box-shadow: 0 4px 24px rgba(196, 149, 106, 0.06);
 }
 .love-letter-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 16px;
+  border-radius: 20px;
   background: radial-gradient(ellipse at top right, rgba(196, 149, 106, 0.06) 0%, transparent 60%);
   pointer-events: none;
 }
@@ -106,6 +93,16 @@ body {
 /* Section */
 .section {
   padding: 3rem 0;
+}
+
+/* Section compact — for data group */
+.section-compact {
+  padding: 1.5rem 0;
+}
+
+/* About Human background — warm gradient fade in/out */
+.about-human-bg {
+  background: linear-gradient(180deg, var(--color-bg-primary) 0%, #FFF8F0 8%, #FFF8F0 92%, var(--color-bg-primary) 100%);
 }
 
 /* Tag pill */

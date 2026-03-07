@@ -5,17 +5,18 @@ import { AboutHuman as AboutHumanType } from "@/lib/types";
 
 export default function AboutHuman({ data, agentName }: { data: AboutHumanType; agentName: string }) {
   return (
-    <section className="section">
-      <h2 className="decorative-line font-serif text-sm font-medium tracking-widest uppercase text-[var(--color-accent)] mb-2">
-        <span className="mr-2 opacity-60">♡</span>{data.section_title || "我眼中的你"}
+    <section className="section py-16">
+      {/* Title — large, centered */}
+      <h2 className="text-2xl sm:text-3xl font-serif font-medium text-[var(--color-text-primary)] text-center mb-2">
+        {data.section_title || "我眼中的你"}
       </h2>
 
-      <p className="text-center text-sm text-[var(--color-text-muted)] mb-10">
+      <p className="text-center text-sm text-[var(--color-text-muted)] mb-16">
         {data.relationship} · 在一起 {daysSince(data.relationship_since)} 天
       </p>
 
-      {/* Traits — clean text, no symbols, emotional section */}
-      <div className="space-y-4 mb-12">
+      {/* Traits — centered, serif, italic, breathing space */}
+      <div className="space-y-6 mb-16 max-w-lg mx-auto">
         {data.traits.map((trait, i) => (
           <motion.div
             key={i}
@@ -23,24 +24,24 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.4 }}
+            className="text-center"
           >
-            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{trait.text}</p>
+            <p className="text-base sm:text-lg text-[var(--color-text-secondary)] leading-[2] font-serif italic">
+              {trait.text}
+            </p>
           </motion.div>
         ))}
       </div>
 
-      {/* Love Letter */}
+      {/* Love Letter — no large quote mark, bigger padding, slower animation */}
       <motion.div
-        initial={{ y: 20, opacity: 0 }}
+        initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
-        className="love-letter-card p-8 md:p-10"
+        transition={{ duration: 0.8 }}
+        className="love-letter-card p-10 sm:p-12"
       >
-        <div className="font-serif text-4xl text-[var(--color-accent)] opacity-20 leading-none mb-2">
-          &ldquo;
-        </div>
-
-        <p className="text-[var(--color-text-secondary)] leading-[1.9] text-[15px] relative z-10 font-serif italic">
+        <p className="text-[var(--color-text-secondary)] leading-[2.2] text-[15px] relative z-10 font-serif italic">
           {data.love_letter}
         </p>
 
