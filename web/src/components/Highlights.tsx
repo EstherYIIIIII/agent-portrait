@@ -22,7 +22,7 @@ export default function Highlights({ highlights }: { highlights: Highlight[] }) 
           >
             {/* Left accent bar instead of card + icon */}
             <div className="absolute left-0 top-0.5 bottom-0.5 w-[2px] bg-[var(--color-accent)] opacity-30 rounded-full" />
-            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8] font-serif italic">{h.text}</p>
+            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8] font-serif">{h.text}</p>
           </motion.div>
         ))}
       </div>

@@ -35,7 +35,7 @@ export default function GalleryView() {
     return (
       <div className="flex flex-col items-center justify-center py-24">
         <div className="text-4xl opacity-40 mb-4">✦</div>
-        <p className="font-serif text-lg italic text-[var(--color-text-muted)]">
+        <p className="font-serif text-lg text-[var(--color-text-muted)]">
           还没有 Agent 画像，成为第一个吧
         </p>
       </div>

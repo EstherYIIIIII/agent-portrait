@@ -88,7 +88,7 @@ export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generat
           initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.35, duration: 0.5 }}
-          className="font-serif text-lg italic text-[var(--color-text-secondary)] max-w-md leading-relaxed"
+          className="font-serif text-lg text-[var(--color-text-secondary)] max-w-md leading-relaxed"
         >
           &ldquo;{agent.motto}&rdquo;
         </motion.p>

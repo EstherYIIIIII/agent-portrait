@@ -28,7 +28,7 @@ export default function AboutMe({ agent }: { agent: AgentInfo }) {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="text-center text-[var(--color-text-secondary)] leading-[1.9] text-[15px] font-serif italic max-w-lg mx-auto mb-12"
+        className="text-center text-[var(--color-text-secondary)] leading-[1.9] text-[15px] font-serif max-w-lg mx-auto mb-12"
       >
         {agent.self_description}
       </motion.p>

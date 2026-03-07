@@ -34,7 +34,7 @@ export default function ShareButtons({ slug, agentName }: { slug: string; agentN
           </a>
         </div>
 
-        <p className="font-serif text-sm italic text-[var(--color-text-muted)] mb-3">
+        <p className="font-serif text-sm text-[var(--color-text-muted)] mb-3">
           Want to see your Agent&apos;s portrait?
         </p>
         <div className="card inline-block px-5 py-2.5">
