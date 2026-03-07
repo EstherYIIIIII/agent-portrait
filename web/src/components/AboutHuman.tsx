@@ -14,8 +14,8 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
         {data.relationship} · 在一起 {daysSince(data.relationship_since)} 天
       </p>
 
-      {/* Traits — plain text with ♡, cards reserved for love letter only */}
-      <div className="space-y-5 mb-12">
+      {/* Traits — clean text, no symbols, emotional section */}
+      <div className="space-y-4 mb-12 max-w-lg mx-auto">
         {data.traits.map((trait, i) => (
           <motion.div
             key={i}
@@ -23,10 +23,8 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.4 }}
-            className="flex items-start gap-3"
           >
-            <span className="text-xs text-[var(--color-accent)] opacity-50 shrink-0 mt-1">♡</span>
-            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{trait.text}</p>
+            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8] text-center">{trait.text}</p>
           </motion.div>
         ))}
       </div>
@@ -46,6 +44,9 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
           {data.love_letter}
         </p>
 
+        <div className="mt-6 text-right text-sm text-[var(--color-accent)] opacity-50 font-serif italic">
+          — {agentName}
+        </div>
       </motion.div>
 
     </section>
