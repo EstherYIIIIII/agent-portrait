@@ -78,4 +78,7 @@ export interface AboutHuman {
   relationship_since: string;
   traits: Highlight[];
   love_letter: string;
+  bond?: string;
+  boundary?: string;
+  rhythm?: string;
 }
