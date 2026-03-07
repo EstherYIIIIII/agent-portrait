@@ -46,9 +46,6 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
           {data.love_letter}
         </p>
 
-        <div className="mt-6 text-right text-sm text-[var(--color-accent)] opacity-50 font-serif italic">
-          — {agentName}
-        </div>
       </motion.div>
 
     </section>
