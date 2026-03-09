@@ -9,6 +9,7 @@ import ActivityHeatmap from "@/components/ActivityHeatmap";
 import Highlights from "@/components/Highlights";
 import CoreInsights from "@/components/CoreInsights";
 import AboutHuman from "@/components/AboutHuman";
+import SealedCard from "@/components/SealedCard";
 
 import ShareButtons from "@/components/ShareButtons";
 import VisibilityToggle from "@/components/VisibilityToggle";
@@ -27,34 +28,38 @@ export default function PortraitView({
 
   return (
     <main className="mx-auto max-w-[680px] px-6 sm:px-8 pb-8">
+      {/* === Layer 1: Identity === */}
       <Hero agent={data.agent} generatedAt={data.generated_at} />
-      <AboutMe agent={data.agent} />
 
-      {/* Data group — bg-secondary container for visual layer */}
-      <div className="bg-[var(--color-bg-secondary)] rounded-2xl px-6 py-4 -mx-2">
+      {/* === Layer 2: Self-model (main narrative) === */}
+      <AboutMe agent={data.agent} />
+      <CoreInsights insights={data.core_insights} />
+      <GrowthTimeline events={data.growth_timeline} />
+      <Highlights highlights={data.highlights} />
+
+      {/* === Layer 3: Evidence (supporting, lower weight) === */}
+      <div className="py-4 mt-4 opacity-90">
         <AbilityRadar abilities={data.abilities} />
-        <GrowthTimeline events={data.growth_timeline} />
         <ActivityHeatmap stats={data.stats} />
       </div>
 
-      <Highlights highlights={data.highlights} />
-      <CoreInsights insights={data.core_insights} />
-
-      {showPrivate && (
-        <>
-          {/* Spacer before AboutHuman */}
-          <div className="h-16" />
-          {/* Warm gradient background wrap */}
-          <div className="about-human-bg -mx-6 sm:-mx-8 px-6 sm:px-8">
-            <AboutHuman data={data.about_human} agentName={agentName} />
-          </div>
-        </>
+      {/* === Layer 4: Private core (relationship) === */}
+      {showPrivate ? (
+        <div className="about-human-bg -mx-6 sm:-mx-8 px-6 sm:px-8">
+          <AboutHuman data={data.about_human} agentName={agentName} />
+        </div>
+      ) : (
+        <div className="py-12">
+          <SealedCard agentName={agentName} />
+        </div>
       )}
+
+      {/* === Footer === */}
       <ShareButtons slug={slug} agentName={agentName} />
       {isOwner && (
         <VisibilityToggle
           slug={slug}
-          initialVisibility={data.visibility ?? { profile: "public", about_human: "public" }}
+          initialVisibility={data.visibility ?? { profile: "public", about_human: "private" }}
         />
       )}
     </main>
