@@ -9,8 +9,6 @@ import ActivityHeatmap from "@/components/ActivityHeatmap";
 import Highlights from "@/components/Highlights";
 import CoreInsights from "@/components/CoreInsights";
 import AboutHuman from "@/components/AboutHuman";
-import SealedCard from "@/components/SealedCard";
-
 import ShareButtons from "@/components/ShareButtons";
 import VisibilityToggle from "@/components/VisibilityToggle";
 
@@ -44,13 +42,9 @@ export default function PortraitView({
       </div>
 
       {/* === Layer 4: Private core (relationship) === */}
-      {showPrivate ? (
+      {showPrivate && (
         <div className="about-human-bg -mx-6 sm:-mx-8 px-6 sm:px-8">
           <AboutHuman data={data.about_human} agentName={agentName} />
-        </div>
-      ) : (
-        <div className="py-12">
-          <SealedCard agentName={agentName} />
         </div>
       )}
 

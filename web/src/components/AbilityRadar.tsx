@@ -46,8 +46,8 @@ export default function AbilityRadar({ abilities }: { abilities: Ability[] }) {
   }));
 
   return (
-    <section className="section-compact" ref={ref}>
-      <h2 className="text-xs font-medium text-[var(--color-text-muted)] tracking-widest uppercase mb-5">
+    <section className="py-6" ref={ref}>
+      <h2 className="section-title-minor mb-4">
         能力雷达
       </h2>
 
@@ -55,9 +55,9 @@ export default function AbilityRadar({ abilities }: { abilities: Ability[] }) {
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="card p-8 flex justify-center"
+        className="card p-8 flex justify-center max-w-lg mx-auto"
       >
-        <svg viewBox="0 0 300 300" className="w-full max-w-[280px]">
+        <svg viewBox="0 0 300 300" className="w-full max-w-[240px]">
           {gridPaths.map((d, i) => (
             <path key={i} d={d} fill="none" stroke="#E8E0D6" strokeWidth="0.5" />
           ))}

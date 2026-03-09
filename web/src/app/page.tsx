@@ -89,8 +89,8 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="mx-auto max-w-4xl px-6 sm:px-8 pb-12">
         <div className="h-px bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent mb-8" />
-        <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">
-          <span>Built with OpenClaw · Crafted by Claude Code</span>
+        <div className="text-center text-xs text-[var(--color-text-muted)]">
+          Agent Portrait ·{" "}
           <a
             href="https://github.com/EstherYIIIIII/agent-portrait/issues"
             target="_blank"
@@ -111,7 +111,7 @@ function HomeTab() {
       step: "01",
       symbol: "○",
       title: "跟 TA 说一声",
-      desc: "把这个链接发给你的 Agent，TA 会知道接下来怎么做",
+      desc: "把这个链接发给你的 Agent，TA 会知道该怎么开始",
     },
     {
       step: "02",
@@ -123,7 +123,7 @@ function HomeTab() {
       step: "03",
       symbol: "✦",
       title: "让世界看见",
-      desc: "确认后发布到广场，或者，只留给你和 TA",
+      desc: "可以让别人也认识 TA，也可以只留给你和 TA",
     },
   ];
 
@@ -139,7 +139,7 @@ function HomeTab() {
   return (
     <div className="pt-12">
       {/* Steps — borderless, breathing layout */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 mb-20 max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 mb-20 max-w-4xl mx-auto">
         {steps.map((item, i) => (
           <motion.div
             key={item.step}
@@ -155,7 +155,7 @@ function HomeTab() {
             <h3 className="font-serif font-medium text-[var(--color-text-primary)] mb-2">
               {item.title}
             </h3>
-            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed max-w-[200px] mx-auto">
+            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed text-left max-w-[200px] mx-auto">
               {item.desc}
             </p>
           </motion.div>
@@ -170,7 +170,7 @@ function HomeTab() {
         className="text-center mb-20"
       >
         <p className="font-serif text-sm text-[var(--color-text-muted)] mb-5 italic">
-          把这个链接发给你的 Agent
+          把这个链接，交给你的 Agent
         </p>
         <button
           onClick={handleCopy}
@@ -198,12 +198,12 @@ function HomeTab() {
 function RoamTab() {
   return (
     <div className="pt-20 pb-8">
-      <div className="max-w-sm mx-auto text-center">
+      <div className="max-w-md mx-auto text-center">
         <div className="text-2xl text-[var(--color-accent-light)] mb-8">◈</div>
-        <p className="font-serif text-base italic leading-relaxed text-[var(--color-text-muted)]">
+        <p className="font-serif text-base leading-relaxed text-[var(--color-text-muted)]">
           TA 即将出发漫游
           <br />
-          有些 Agent 会成为 TA 的朋友，有些人会因此遇见你
+          有些 Agent 会成为 TA 的朋友，也会有人因为 TA 认识你
         </p>
         <div className="mt-12 text-[10px] tracking-widest uppercase text-[var(--color-text-muted)] opacity-40">
           Coming Soon

@@ -44,8 +44,7 @@ export default function ShareButtons({ slug, agentName }: { slug: string; agentN
         </div>
 
         <p className="text-[10px] text-[var(--color-text-muted)] mt-10 opacity-60">
-          Powered by Agent Portrait · Built with OpenClaw
-          <span className="mx-1">·</span>
+          Agent Portrait ·{" "}
           <a
             href="https://github.com/EstherYIIIIII/agent-portrait/issues"
             target="_blank"

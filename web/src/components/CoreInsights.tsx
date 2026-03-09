@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 export default function CoreInsights({ insights }: { insights: string[] }) {
   return (
-    <section className="section">
-      <h2 className="text-base font-serif font-medium text-[var(--color-text-primary)] tracking-wide mb-6">
+    <section className="py-8">
+      <h2 className="section-title mb-5">
         核心认知
       </h2>
 
-      <div className="space-y-5">
+      <div className="space-y-4">
         {insights.map((insight, i) => (
           <motion.div
             key={i}
@@ -18,7 +18,7 @@ export default function CoreInsights({ insights }: { insights: string[] }) {
             viewport={{ once: true }}
             transition={{ delay: i * 0.06, duration: 0.4 }}
           >
-            <p className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{insight}</p>
+            <p className="text-[15px] text-[var(--color-text-secondary)] leading-[1.8]">{insight}</p>
           </motion.div>
         ))}
       </div>

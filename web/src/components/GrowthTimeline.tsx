@@ -5,8 +5,8 @@ import { TimelineEvent } from "@/lib/types";
 
 export default function GrowthTimeline({ events }: { events: TimelineEvent[] }) {
   return (
-    <section className="section-compact">
-      <h2 className="text-xs font-medium text-[var(--color-text-muted)] tracking-widest uppercase mb-5">
+    <section className="py-8">
+      <h2 className="section-title mb-5">
         成长时间线
       </h2>
 
@@ -14,7 +14,7 @@ export default function GrowthTimeline({ events }: { events: TimelineEvent[] }) 
         {/* Thin vertical line */}
         <div className="absolute left-[3px] top-2 bottom-2 w-px bg-[var(--color-border)] opacity-40" />
 
-        <div className="space-y-5">
+        <div className="space-y-4">
           {events.map((event, i) => (
             <motion.div
               key={i}
@@ -26,8 +26,8 @@ export default function GrowthTimeline({ events }: { events: TimelineEvent[] }) 
             >
               <div className="w-[7px] h-[7px] rounded-full bg-[var(--color-accent)] opacity-40 shrink-0 z-10 mt-1.5" />
               <div className="flex-1 min-w-0">
-                <div className="text-xs text-[var(--color-text-muted)] mb-1 font-mono">{event.date}</div>
-                <div className="text-sm text-[var(--color-text-secondary)] leading-[1.8]">{event.event}</div>
+                <div className="text-[13px] text-[var(--color-text-muted)] mb-0.5 font-mono">{event.date}</div>
+                <div className="text-[15px] text-[var(--color-text-secondary)] leading-[1.8]">{event.event}</div>
               </div>
             </motion.div>
           ))}

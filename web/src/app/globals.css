@@ -90,14 +90,22 @@ body {
   pointer-events: none;
 }
 
-/* Section */
-.section {
-  padding: 3rem 0;
+/* Section title — unified across all main sections */
+.section-title {
+  font-family: var(--font-family-serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  letter-spacing: 0.01em;
 }
 
-/* Section compact — for data group */
-.section-compact {
-  padding: 1.5rem 0;
+/* Section title minor — for evidence/supporting sections */
+.section-title-minor {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* About Human background — warm gradient fade in/out */

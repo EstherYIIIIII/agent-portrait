@@ -14,78 +14,68 @@ function formatDate(iso: string): string {
 
 export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generatedAt?: string }) {
   return (
-    <section className="pb-12">
+    <section className="pt-8 pb-10">
       {/* Back nav */}
-      <nav className="pt-8 px-6 mb-0">
+      <nav className="mb-10">
         <Link
           href="/"
-          className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+          className="text-[13px] text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
         >
           ← Agent Portrait
         </Link>
       </nav>
 
-      {/* Cover area — full width, negative margin to cancel main px-6 */}
-      <div className="relative -mx-6 sm:-mx-8">
-        {agent.cover_url ? (
-          <div className="w-full aspect-[3/2] max-h-[280px] overflow-hidden">
-            <img
-              src={agent.cover_url}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ) : (
-          <div
-            className="w-full aspect-[3/2] max-h-[280px]"
-            style={{
-              background: "linear-gradient(135deg, #F5E6D3 0%, #E8D5C0 30%, #D4A574 70%, #C4956A 100%)",
-            }}
-          />
-        )}
-      </div>
-
-      {/* Avatar overlapping cover bottom */}
+      {/* Avatar + Identity — centered */}
       <div className="flex flex-col items-center text-center">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", damping: 15, stiffness: 200 }}
-          className="-mt-12 mb-6"
+          className="mb-5"
         >
-          <div className="w-24 h-24 rounded-full bg-[var(--color-bg-secondary)] border-4 border-[var(--color-bg-primary)] flex items-center justify-center text-5xl shadow-md">
-            {agent.emoji || <span className="text-2xl text-[var(--color-accent)]">✦</span>}
+          <div className="w-20 h-20 rounded-full bg-[var(--color-bg-secondary)] border-[3px] border-[var(--color-bg-primary)] flex items-center justify-center text-4xl shadow-sm">
+            {agent.emoji || <span className="text-xl text-[var(--color-accent)]">✦</span>}
           </div>
         </motion.div>
 
-        {/* Name: 崽崽 · ZaiZai */}
+        {/* Name */}
         <motion.h1
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.15, duration: 0.5 }}
-          className="font-serif text-4xl sm:text-5xl font-semibold tracking-tight text-[var(--color-text-primary)] mb-2"
+          className="font-serif text-[32px] sm:text-[36px] font-semibold tracking-tight text-[var(--color-text-primary)] mb-1.5"
         >
           {agent.name}
           {agent.name_en && (
-            <>
-              <span className="text-[var(--color-text-muted)] text-4xl sm:text-5xl mx-2 font-light"> · </span>
-              <span className="text-[var(--color-text-muted)] text-4xl sm:text-5xl font-normal">
-                {agent.name_en}
-              </span>
-            </>
+            <span className="text-[var(--color-text-muted)] font-normal"> · {agent.name_en}</span>
           )}
         </motion.h1>
 
-        {/* Generated at */}
+        {/* Meta line: species · pronouns · birthday · age */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 text-[13px] text-[var(--color-text-muted)] mb-4"
+        >
+          <span>{agent.species}</span>
+          <span className="text-[var(--color-border)]">·</span>
+          <span>{agent.pronouns}</span>
+          <span className="text-[var(--color-border)]">·</span>
+          <span>{agent.birthday}</span>
+          <span className="text-[var(--color-border)]">·</span>
+          <span>已存活 <strong className="text-[var(--color-accent)] font-medium">{agent.age_days}</strong> 天</span>
+        </motion.div>
+
         {generatedAt && (
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-xs text-[var(--color-text-muted)] mb-3"
+            transition={{ delay: 0.25, duration: 0.5 }}
+            className="text-[11px] text-[var(--color-text-muted)] mb-4"
           >
             Portrait taken on {formatDate(generatedAt)}
-          </motion.p>
+          </motion.div>
         )}
 
         {/* Motto */}
@@ -93,7 +83,7 @@ export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generat
           initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.35, duration: 0.5 }}
-          className="font-serif text-lg text-[var(--color-text-secondary)] max-w-md leading-relaxed"
+          className="font-serif text-[20px] text-[var(--color-text-secondary)] max-w-md leading-relaxed"
         >
           &ldquo;{agent.motto}&rdquo;
         </motion.p>

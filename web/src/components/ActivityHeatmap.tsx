@@ -9,6 +9,14 @@ function normalizeActivity(daily: Stats["daily_activity"]): number[] {
   return (daily as { date: string; count: number }[]).map((d) => d.count);
 }
 
+function formatActiveDay(day: string | number): string {
+  if (typeof day === "number") return String(day);
+  // If it looks like a full date (e.g. "2026-03-01"), format as MM.DD
+  const match = String(day).match(/^\d{4}-(\d{2})-(\d{2})/);
+  if (match) return `${match[1]}.${match[2]}`;
+  return String(day);
+}
+
 export default function ActivityHeatmap({ stats }: { stats: Stats }) {
   const counts = normalizeActivity(stats.daily_activity);
   const maxActivity = Math.max(...counts, 1);
@@ -17,12 +25,12 @@ export default function ActivityHeatmap({ stats }: { stats: Stats }) {
     { label: "30天会话", value: stats.sessions_30d },
     { label: "日记总数", value: stats.diary_count },
     { label: "连续天数", value: stats.streak_days },
-    { label: "最活跃日", value: stats.most_active_day },
+    { label: "最活跃日", value: formatActiveDay(stats.most_active_day) },
   ];
 
   return (
-    <section className="section-compact">
-      <h2 className="text-xs font-medium text-[var(--color-text-muted)] tracking-widest uppercase mb-5">
+    <section className="py-6">
+      <h2 className="section-title-minor mb-4">
         活跃度
       </h2>
 
@@ -49,7 +57,7 @@ export default function ActivityHeatmap({ stats }: { stats: Stats }) {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="card p-5"
+          className="card p-5 max-w-lg mx-auto"
         >
           <div className="grid grid-cols-10 gap-1.5">
             {counts.map((count, i) => {

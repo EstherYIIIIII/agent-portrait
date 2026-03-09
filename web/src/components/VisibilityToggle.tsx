@@ -11,19 +11,19 @@ export default function VisibilityToggle({
   initialVisibility: Visibility;
 }) {
   const [visibility, setVisibility] = useState(initialVisibility);
-  const [showInput, setShowInput] = useState(false);
+  const [editing, setEditing] = useState<"profile" | "about_human" | null>(null);
   const [passphrase, setPassphrase] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const isPublic = visibility.profile === "public";
+  const handleToggle = async (field: "profile" | "about_human") => {
+    if (editing !== field) {
+      setEditing(field);
+      setError("");
+      setPassphrase("");
+      return;
+    }
 
-  const handleToggleClick = () => {
-    setShowInput(true);
-    setError("");
-  };
-
-  const handleConfirm = async () => {
     if (!passphrase.trim()) {
       setError("请输入口令");
       return;
@@ -32,9 +32,13 @@ export default function VisibilityToggle({
     setLoading(true);
     setError("");
 
-    const newVisibility: Visibility = isPublic
-      ? { profile: "private", about_human: "private" }
-      : { profile: "public", about_human: "public" };
+    const newValue = visibility[field] === "public" ? "private" : "public";
+    const newVisibility = { ...visibility, [field]: newValue };
+
+    // If making profile private, about_human must also be private
+    if (field === "profile" && newValue === "private") {
+      newVisibility.about_human = "private";
+    }
 
     try {
       const res = await fetch("/api/portrait/visibility", {
@@ -50,7 +54,7 @@ export default function VisibilityToggle({
       }
 
       setVisibility(newVisibility);
-      setShowInput(false);
+      setEditing(null);
       setPassphrase("");
     } catch {
       setError("网络错误");
@@ -60,60 +64,64 @@ export default function VisibilityToggle({
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 mt-6">
-      {/* Toggle switch */}
-      <div className="flex items-center gap-3">
-        <span className="text-xs text-[var(--color-text-muted)]">
-          {isPublic ? "公开中" : "仅自己可见"}
-        </span>
-        <button
-          onClick={handleToggleClick}
-          className="relative w-11 h-6 rounded-full transition-colors duration-200 cursor-pointer"
-          style={{
-            backgroundColor: isPublic
-              ? "var(--color-accent)"
-              : "var(--color-border)",
-          }}
-          aria-label="切换公开状态"
-        >
-          <span
-            className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200"
-            style={{
-              transform: isPublic ? "translateX(20px)" : "translateX(0)",
-            }}
-          />
-        </button>
+    <div className="mt-8 pt-6 border-t border-[var(--color-border)] border-opacity-40">
+      <div className="flex flex-col gap-3">
+        {/* Profile visibility */}
+        <div className="flex items-center justify-between">
+          <span className="text-[13px] text-[var(--color-text-muted)]">
+            Profile
+          </span>
+          <button
+            onClick={() => handleToggle("profile")}
+            className="text-[13px] px-3 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-light)] transition-colors cursor-pointer"
+          >
+            {visibility.profile === "public" ? "Public" : "Private"}
+          </button>
+        </div>
+
+        {/* About Human visibility */}
+        <div className="flex items-center justify-between">
+          <span className="text-[13px] text-[var(--color-text-muted)]">
+            Letter
+          </span>
+          <button
+            onClick={() => handleToggle("about_human")}
+            className="text-[13px] px-3 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-light)] transition-colors cursor-pointer"
+          >
+            {visibility.about_human === "public" ? "Public" : "Only You"}
+          </button>
+        </div>
       </div>
 
       {/* Passphrase input */}
-      {showInput && (
-        <div className="flex items-center gap-2 animate-in fade-in duration-200">
+      {editing && (
+        <div className="flex items-center gap-2 mt-4">
           <input
             type="password"
             value={passphrase}
             onChange={(e) => setPassphrase(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleConfirm()}
-            placeholder="输入口令"
-            className="px-3 py-1.5 text-xs rounded-lg bg-[var(--color-card-bg)] border border-[var(--color-border)] text-[var(--color-text-secondary)] outline-none focus:border-[var(--color-accent)] w-36"
+            onKeyDown={(e) => e.key === "Enter" && handleToggle(editing)}
+            placeholder="输入口令确认"
+            className="flex-1 px-3 py-1.5 text-[13px] rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] text-[var(--color-text-secondary)] outline-none focus:border-[var(--color-accent)]"
             autoFocus
           />
           <button
-            onClick={handleConfirm}
+            onClick={() => handleToggle(editing)}
             disabled={loading}
-            className="px-3 py-1.5 text-xs rounded-lg bg-[var(--color-accent)] text-white cursor-pointer disabled:opacity-50"
+            className="px-3 py-1.5 text-[13px] rounded-lg bg-[var(--color-accent)] text-white cursor-pointer disabled:opacity-50"
           >
             {loading ? "..." : "确认"}
           </button>
           <button
-            onClick={() => { setShowInput(false); setError(""); setPassphrase(""); }}
-            className="text-xs text-[var(--color-text-muted)] cursor-pointer"
+            onClick={() => { setEditing(null); setError(""); setPassphrase(""); }}
+            className="text-[13px] text-[var(--color-text-muted)] cursor-pointer"
           >
             取消
           </button>
         </div>
       )}
 
-      {error && <p className="text-xs text-red-400">{error}</p>}
+      {error && <p className="text-[13px] text-red-400 mt-2">{error}</p>}
     </div>
   );
 }
