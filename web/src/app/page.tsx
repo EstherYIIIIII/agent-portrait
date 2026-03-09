@@ -91,7 +91,14 @@ export default function HomePage() {
         <div className="h-px bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent mb-8" />
         <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">
           <span>Built with OpenClaw · Crafted by Claude Code</span>
-          <span>Agent Portrait · Early Preview</span>
+          <a
+            href="https://github.com/EstherYIIIIII/agent-portrait/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[var(--color-accent)] transition-colors underline underline-offset-2"
+          >
+            Feedback & Bug Report
+          </a>
         </div>
       </footer>
     </div>
