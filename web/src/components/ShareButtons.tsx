@@ -51,7 +51,7 @@ export default function ShareButtons({ slug, agentName }: { slug: string; agentN
             rel="noopener noreferrer"
             className="hover:text-[var(--color-accent)] transition-colors underline underline-offset-2"
           >
-            反馈与问题报告
+            Feedback & Bug Report
           </a>
         </p>
       </div>
