@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { TimelineEvent } from "@/lib/types";
 
 export default function GrowthTimeline({ events }: { events: TimelineEvent[] }) {
+  if (!events || events.length === 0) return null;
   return (
     <section className="py-8">
       <h2 className="section-title mb-5">

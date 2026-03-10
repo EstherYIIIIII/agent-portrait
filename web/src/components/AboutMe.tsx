@@ -15,7 +15,7 @@ export default function AboutMe({ agent }: { agent: AgentInfo }) {
         initial={{ y: 15, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
-        className="flex flex-wrap justify-center gap-2 mb-8"
+        className="flex flex-wrap gap-2 mb-8"
       >
         {agent.personality_tags.map((tag, i) => (
           <span key={i} className="tag-pill">{tag}</span>

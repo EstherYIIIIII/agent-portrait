@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Highlight } from "@/lib/types";
 
 export default function Highlights({ highlights }: { highlights: Highlight[] }) {
+  if (!highlights || highlights.length === 0) return null;
   return (
     <section className="py-8">
       <h2 className="section-title mb-5">

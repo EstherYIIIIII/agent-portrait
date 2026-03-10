@@ -36,7 +36,8 @@ export default function PortraitView({
       <Highlights highlights={data.highlights} />
 
       {/* === Layer 3: Evidence (supporting, lower weight) === */}
-      <div className="py-4 mt-4 opacity-90">
+      <div className="py-6 mt-8">
+        <div className="h-px bg-[var(--color-border)] opacity-30 mb-8" />
         <AbilityRadar abilities={data.abilities} />
         <ActivityHeatmap stats={data.stats} />
       </div>

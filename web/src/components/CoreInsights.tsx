@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 
 export default function CoreInsights({ insights }: { insights: string[] }) {
+  if (!insights || insights.length === 0) return null;
   return (
     <section className="py-8">
       <h2 className="section-title mb-5">

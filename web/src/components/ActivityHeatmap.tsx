@@ -18,6 +18,7 @@ function formatActiveDay(day: string | number): string {
 }
 
 export default function ActivityHeatmap({ stats }: { stats: Stats }) {
+  if (!stats) return null;
   const counts = normalizeActivity(stats.daily_activity);
   const maxActivity = Math.max(...counts, 1);
 
@@ -57,7 +58,7 @@ export default function ActivityHeatmap({ stats }: { stats: Stats }) {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="card p-5 max-w-lg mx-auto"
+          className="card card-static p-5 max-w-lg mx-auto"
         >
           <div className="grid grid-cols-10 gap-1.5">
             {counts.map((count, i) => {

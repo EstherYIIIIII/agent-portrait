@@ -10,7 +10,7 @@
   --color-border: #E8E0D6;
   --color-border-hover: #D4A574;
   --color-text-primary: #1A1A1A;
-  --color-text-secondary: #5C5549;
+  --color-text-secondary: #4A4039;
   --color-text-muted: #8C8279;
   --color-accent: #C4956A;
   --color-accent-hover: #B07D52;
@@ -65,6 +65,11 @@ body {
   box-shadow: 0 2px 12px rgba(196, 149, 106, 0.08);
   transform: translateY(-1px);
 }
+.card.card-static:hover {
+  border-color: var(--color-border);
+  box-shadow: none;
+  transform: none;
+}
 
 /* Warm accent card (for About Human) */
 .card-warm {
@@ -93,8 +98,8 @@ body {
 /* Section title — unified across all main sections */
 .section-title {
   font-family: var(--font-family-serif);
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   color: var(--color-text-primary);
   letter-spacing: 0.01em;
 }

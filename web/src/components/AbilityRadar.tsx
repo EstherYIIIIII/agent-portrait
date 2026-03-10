@@ -10,6 +10,7 @@ function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
 }
 
 export default function AbilityRadar({ abilities }: { abilities: Ability[] }) {
+  if (!abilities || abilities.length === 0) return null;
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -55,7 +56,7 @@ export default function AbilityRadar({ abilities }: { abilities: Ability[] }) {
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="card p-8 flex justify-center max-w-lg mx-auto"
+        className="card card-static p-8 flex justify-center max-w-lg mx-auto"
       >
         <svg viewBox="0 0 300 300" className="w-full max-w-[240px]">
           {gridPaths.map((d, i) => (

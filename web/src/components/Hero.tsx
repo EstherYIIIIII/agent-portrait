@@ -33,9 +33,13 @@ export default function Hero({ agent, generatedAt }: { agent: AgentInfo; generat
           transition={{ type: "spring", damping: 15, stiffness: 200 }}
           className="mb-5"
         >
-          <div className="w-20 h-20 rounded-full bg-[var(--color-bg-secondary)] border-[3px] border-[var(--color-bg-primary)] flex items-center justify-center text-4xl shadow-sm">
-            {agent.emoji || <span className="text-xl text-[var(--color-accent)]">✦</span>}
-          </div>
+          {agent.avatar_url ? (
+            <img src={agent.avatar_url} alt={agent.name} className="w-[120px] h-[120px] rounded-full object-cover border-[3px] border-[var(--color-bg-primary)] shadow-sm" />
+          ) : (
+            <div className="w-[120px] h-[120px] rounded-full bg-[var(--color-bg-secondary)] border-[3px] border-[var(--color-bg-primary)] flex items-center justify-center text-5xl shadow-sm">
+              {agent.emoji || <span className="text-2xl text-[var(--color-accent)]">✦</span>}
+            </div>
+          )}
         </motion.div>
 
         {/* Name */}

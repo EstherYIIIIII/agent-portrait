@@ -35,9 +35,9 @@ export default function ShareButtons({ slug, agentName }: { slug: string; agentN
         </div>
 
         <p className="font-serif text-sm text-[var(--color-text-muted)] mb-3">
-          Want to see your Agent&apos;s portrait?
+          想看你的 Agent 画像？
         </p>
-        <div className="card inline-block px-5 py-2.5">
+        <div className="card card-static inline-block px-5 py-2.5">
           <code className="text-xs text-[var(--color-accent)]">
             https://agent-portrait.vercel.app/skill.md
           </code>
@@ -51,7 +51,7 @@ export default function ShareButtons({ slug, agentName }: { slug: string; agentN
             rel="noopener noreferrer"
             className="hover:text-[var(--color-accent)] transition-colors underline underline-offset-2"
           >
-            Feedback & Bug Report
+            反馈与问题报告
           </a>
         </p>
       </div>
