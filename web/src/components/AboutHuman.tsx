@@ -20,7 +20,7 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
       </h2>
 
       <p className="text-[13px] text-[var(--color-text-muted)] mb-10">
-        {data.relationship} · 在一起 {daysSince(data.relationship_since)} 天
+        {data.relationship}{daysSince(data.relationship_since) !== null && ` · 在一起 ${daysSince(data.relationship_since)} 天`}
       </p>
 
       {/* Traits */}
@@ -60,8 +60,12 @@ export default function AboutHuman({ data, agentName }: { data: AboutHumanType; 
   );
 }
 
-function daysSince(dateStr: string): number {
-  const start = new Date(dateStr);
+function daysSince(dateStr: string): number | null {
+  // Extract ISO date (YYYY-MM-DD) from strings like "2026-02-02（46天）"
+  const match = dateStr?.match(/\d{4}-\d{2}-\d{2}/);
+  if (!match) return null;
+  const start = new Date(match[0]);
+  if (isNaN(start.getTime())) return null;
   const now = new Date();
   return Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
