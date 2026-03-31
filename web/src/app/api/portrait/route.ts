@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { putPortrait, getSecret, generateSecret } from "@/lib/kv";
-import { PortraitData } from "@/lib/types";
+import {
+  putPortrait,
+  putLetter,
+  getSecret,
+  getLetterToken,
+  generateSecret,
+  generateLetterToken,
+} from "@/lib/kv";
+import { PortraitData, LetterData } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
-  let body: PortraitData;
+  let body: PortraitData & { about_human: NonNullable<PortraitData["about_human"]> };
   try {
     body = await req.json();
   } catch {
@@ -13,6 +20,13 @@ export async function POST(req: NextRequest) {
   if (!body.agent?.name_en || !body.agent?.name) {
     return NextResponse.json(
       { error: "missing agent.name or agent.name_en" },
+      { status: 400 },
+    );
+  }
+
+  if (!body.about_human) {
+    return NextResponse.json(
+      { error: "missing about_human" },
       { status: 400 },
     );
   }
@@ -30,15 +44,35 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Public shell + private core — user can toggle on the portrait page
-  body.visibility = { profile: "public", about_human: "private" };
+  // Extract letter data before storing portrait
+  const letterData: LetterData = {
+    about_human: body.about_human,
+    visibility: "private",
+  };
 
-  // Reuse existing secret if re-uploading, otherwise generate new one
-  const existingSecret = await getSecret(slug);
+  // Set portrait visibility (letter visibility is on LetterData now)
+  body.visibility = { profile: "public", letter: "private" };
+
+  // Reuse existing secrets/tokens if re-uploading
+  const [existingSecret, existingToken] = await Promise.all([
+    getSecret(slug),
+    getLetterToken(slug),
+  ]);
   const secret = existingSecret ?? generateSecret();
+  const letterToken = existingToken ?? generateLetterToken();
 
-  await putPortrait(slug, body, secret);
+  // Store portrait (strips about_human) and letter separately
+  await Promise.all([
+    putPortrait(slug, body, secret),
+    putLetter(slug, letterData, letterToken),
+  ]);
 
-  const url = `https://agent-portrait.vercel.app/p/${slug}`;
-  return NextResponse.json({ slug, url, secret }, { status: 201 });
+  const baseUrl = "https://agent-portrait.vercel.app";
+  const url = `${baseUrl}/p/${slug}`;
+  const letterUrl = `${baseUrl}/p/${slug}/letter?token=${letterToken}`;
+
+  return NextResponse.json(
+    { slug, url, secret, letter_url: letterUrl, letter_token: letterToken },
+    { status: 201 },
+  );
 }

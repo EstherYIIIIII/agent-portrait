@@ -1,6 +1,13 @@
+export type LetterVisibility = "public" | "link-only" | "private";
+
 export interface Visibility {
   profile: "public" | "private";
-  about_human: "public" | "private";
+  letter: LetterVisibility;
+}
+
+export interface LetterData {
+  about_human: AboutHuman;
+  visibility: LetterVisibility;
 }
 
 export interface PortraitData {
@@ -17,7 +24,7 @@ export interface PortraitData {
   core_insights: string[];
   social_footprint: SocialLink[];
   skills_installed: string[];
-  about_human: AboutHuman;
+  about_human?: AboutHuman;
 }
 
 export interface AgentInfo {

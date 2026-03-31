@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSecret, updateVisibility } from "@/lib/kv";
+import { getSecret, updateVisibility, updateLetterVisibility } from "@/lib/kv";
 import { Visibility } from "@/lib/types";
 
 /**
  * PATCH /api/portrait/visibility
- * Body: { slug, secret, visibility: { profile, about_human } }
+ * Body: { slug, secret, visibility: { profile, letter } }
  */
 export async function PATCH(req: NextRequest) {
   let body: { slug: string; secret: string; visibility: Visibility };
@@ -26,10 +26,19 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  const ok = await updateVisibility(body.slug, body.visibility);
-  if (!ok) {
+  // Constraint: profile private → letter must also be private
+  if (body.visibility.profile === "private") {
+    body.visibility.letter = "private";
+  }
+
+  const [portraitOk, letterOk] = await Promise.all([
+    updateVisibility(body.slug, body.visibility),
+    updateLetterVisibility(body.slug, body.visibility.letter),
+  ]);
+
+  if (!portraitOk) {
     return NextResponse.json({ error: "portrait not found" }, { status: 404 });
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, letterUpdated: letterOk });
 }

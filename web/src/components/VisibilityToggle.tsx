@@ -1,22 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import { Visibility } from "@/lib/types";
+import { Visibility, LetterVisibility } from "@/lib/types";
+
+const LETTER_CYCLE: LetterVisibility[] = ["private", "link-only", "public"];
+const LETTER_LABELS: Record<LetterVisibility, string> = {
+  public: "Public",
+  "link-only": "Link Only",
+  private: "Only You",
+};
 
 export default function VisibilityToggle({
   slug,
   initialVisibility,
+  letterVisibility: initialLetterVisibility,
 }: {
   slug: string;
   initialVisibility: Visibility;
+  letterVisibility: LetterVisibility;
 }) {
   const [visibility, setVisibility] = useState(initialVisibility);
-  const [editing, setEditing] = useState<"profile" | "about_human" | null>(null);
+  const [letterVis, setLetterVis] = useState(initialLetterVisibility);
+  const [editing, setEditing] = useState<"profile" | "letter" | null>(null);
   const [passphrase, setPassphrase] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleToggle = async (field: "profile" | "about_human") => {
+  const handleToggle = async (field: "profile" | "letter") => {
     if (editing !== field) {
       setEditing(field);
       setError("");
@@ -32,13 +42,22 @@ export default function VisibilityToggle({
     setLoading(true);
     setError("");
 
-    const newValue = visibility[field] === "public" ? "private" : "public";
-    const newVisibility = { ...visibility, [field]: newValue };
+    let newProfile = visibility.profile;
+    let newLetter = letterVis;
 
-    // If making profile private, about_human must also be private
-    if (field === "profile" && newValue === "private") {
-      newVisibility.about_human = "private";
+    if (field === "profile") {
+      newProfile = visibility.profile === "public" ? "private" : "public";
+      // Profile private → letter must also be private
+      if (newProfile === "private") {
+        newLetter = "private";
+      }
+    } else {
+      // Cycle letter visibility
+      const currentIdx = LETTER_CYCLE.indexOf(letterVis);
+      newLetter = LETTER_CYCLE[(currentIdx + 1) % LETTER_CYCLE.length];
     }
+
+    const newVisibility: Visibility = { profile: newProfile, letter: newLetter };
 
     try {
       const res = await fetch("/api/portrait/visibility", {
@@ -54,6 +73,7 @@ export default function VisibilityToggle({
       }
 
       setVisibility(newVisibility);
+      setLetterVis(newLetter);
       setEditing(null);
       setPassphrase("");
     } catch {
@@ -79,16 +99,16 @@ export default function VisibilityToggle({
           </button>
         </div>
 
-        {/* About Human visibility */}
+        {/* Letter visibility — three states */}
         <div className="flex items-center justify-between">
           <span className="text-[13px] text-[var(--color-text-muted)]">
             Letter
           </span>
           <button
-            onClick={() => handleToggle("about_human")}
+            onClick={() => handleToggle("letter")}
             className="text-[13px] px-3 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-light)] transition-colors cursor-pointer"
           >
-            {visibility.about_human === "public" ? "Public" : "Only You"}
+            {LETTER_LABELS[letterVis]}
           </button>
         </div>
       </div>

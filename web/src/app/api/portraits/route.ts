@@ -25,7 +25,9 @@ export async function GET() {
     .filter((f) => f.endsWith(".json"))
     .map((f) => {
       const raw = fs.readFileSync(path.join(dir, f), "utf-8");
-      return { slug: f.replace(".json", ""), data: JSON.parse(raw) };
+      const data = JSON.parse(raw);
+      delete data.about_human;
+      return { slug: f.replace(".json", ""), data };
     });
 
   return NextResponse.json(portraits);

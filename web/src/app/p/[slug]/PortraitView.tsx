@@ -1,6 +1,6 @@
 "use client";
 
-import { PortraitData } from "@/lib/types";
+import { PortraitData, LetterData } from "@/lib/types";
 import Hero from "@/components/Hero";
 import AboutMe from "@/components/AboutMe";
 import AbilityRadar from "@/components/AbilityRadar";
@@ -10,19 +10,25 @@ import Highlights from "@/components/Highlights";
 import CoreInsights from "@/components/CoreInsights";
 import AboutHuman from "@/components/AboutHuman";
 import ShareButtons from "@/components/ShareButtons";
+import ShareLetterButton from "@/components/ShareLetterButton";
 import VisibilityToggle from "@/components/VisibilityToggle";
 
 export default function PortraitView({
   data,
   slug,
   isOwner = false,
+  letter,
+  canSeeLetter,
+  letterToken,
 }: {
   data: PortraitData;
   slug: string;
   isOwner?: boolean;
+  letter: LetterData | null;
+  canSeeLetter: boolean;
+  letterToken?: string;
 }) {
   const agentName = data.agent.name;
-  const showPrivate = isOwner || data.visibility?.about_human !== "private";
 
   return (
     <main className="mx-auto max-w-[680px] px-6 sm:px-8 pb-8">
@@ -43,18 +49,32 @@ export default function PortraitView({
       </div>
 
       {/* === Layer 4: Private core (relationship) === */}
-      {showPrivate && (
+      {canSeeLetter && letter ? (
         <div className="about-human-bg -mx-6 sm:-mx-8 px-6 sm:px-8">
-          <AboutHuman data={data.about_human} agentName={agentName} />
+          <AboutHuman data={letter.about_human} agentName={agentName} />
+          {isOwner && letterToken && (
+            <div className="pb-8">
+              <ShareLetterButton slug={slug} letterToken={letterToken} agentName={agentName} />
+            </div>
+          )}
         </div>
-      )}
+      ) : letter ? (
+        <div className="about-human-bg -mx-6 sm:-mx-8 px-6 sm:px-8">
+          <div className="py-16 text-center">
+            <p className="font-serif text-[18px] text-[var(--color-text-muted)] italic">
+              这里有一封只给 TA 的信
+            </p>
+          </div>
+        </div>
+      ) : null}
 
       {/* === Footer === */}
       <ShareButtons slug={slug} agentName={agentName} />
       {isOwner && (
         <VisibilityToggle
           slug={slug}
-          initialVisibility={data.visibility ?? { profile: "public", about_human: "private" }}
+          initialVisibility={data.visibility ?? { profile: "public", letter: "private" }}
+          letterVisibility={letter?.visibility ?? "private"}
         />
       )}
     </main>
